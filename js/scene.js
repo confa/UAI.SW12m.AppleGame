@@ -57,3 +57,117 @@ function Apple(x, y){
         ctx.fill();
     };
 }
+
+// ---------------------
+
+// common functions
+
+// return color string from 3 channels
+function Color(r, g, b)
+{
+    return ('rgba(' + r + ',' + g + ',' + b +', 1.0)').toString();
+}
+
+// returns random value from 0 to max
+function Random(max)
+{
+    return Math.floor((Math.random()*max)+1);
+}
+
+// clear canvas function
+function clear() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+// ---------------------
+
+// function related to objects drawing
+
+// Drawing all apples
+function drawAllApples(ctx)
+{
+    for (var i=0; i<apples.length; i++)
+    {
+        apples[i].drawApple(ctx);
+    }
+}
+
+// ------------------------
+
+// functions related to objects state changing
+
+// If apples falling flag is true
+// apple is falling
+function appleFalling()
+{
+    for (var i=0; i< apples.length; i++)
+    {
+        if(apples[i].isFalling && apples[i].y < height - tempAppleRadius) {
+            apples[i].y += apples[i].speed;
+        }
+        else
+        {
+            apples[i].isFalling = false;
+        }
+    }
+}
+// If apple lying per 3 seconds
+// it will disappeared
+function appleDisappearance()
+{
+    for (var i=0; i< apples.length; i++)
+    {
+        if(!apples[i].isFalling && apples[i].y < height - tempAppleRadius*2 && apples[i].r >=250) {
+            apples.deleteCell(i);
+        }
+    }
+}
+
+// Apple ripening time per time
+// If apple is riped - start it falling
+function appleRipening(){
+
+    for (var i=0; i< apples.length; i++)
+    {
+        if(!apples[i].isFalling){
+            var colorLambda = 1+Random(2);
+            var r = apples[i].r += colorLambda;
+            var g = apples[i].g -= colorLambda;
+
+            if(g <= 0 && r >=250){
+                apples[i].isFalling = true;
+            }
+        }
+    }
+}
+
+// hero moving
+function move(direction){
+    if(direction == 'left' && hero.x > 0)
+    {
+        hero.x -= 5;
+    }
+    if(direction == 'right' && hero.x < width)
+    {
+        hero.x += 5;
+    }
+}
+
+// Added new apple on tree
+function newApple(){
+    var x = (Math.random()*width);
+    var y = Math.random()*height/2;
+    apples.push(new Apple(x, y));
+}
+
+//-----------------------------
+
+function drawScene(){
+    clear();
+    drawAllApples(ctx);
+    appleRipening();
+    appleFalling();
+    hero.drawHero(ctx);
+    hero.applyGravity();
+    move();
+}
