@@ -171,3 +171,33 @@ function drawScene(){
     hero.applyGravity();
     move();
 }
+
+// initialization
+
+$(function(){
+    canvas = document.getElementById('scene');
+    ctx = canvas.getContext('2d');
+
+    width = canvas.width;
+    height = canvas.height;
+
+    hero = new Hero(100,100);
+
+    var applesCount = 200;
+
+    for (var i=0; i< applesCount; i++){
+        newApple();
+    }
+
+    $('#scene').mousedown(function(e) {
+        hero.IsRunning = true;
+    });
+
+    $('#scene').mouseup(function(e) {
+        hero.IsRunning = false;
+    });
+
+    setInterval(drawScene, 60);
+    setInterval(appleDisappearance, 3000);
+
+});
