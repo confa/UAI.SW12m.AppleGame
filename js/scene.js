@@ -4,6 +4,8 @@ var apples = [];
 var width;
 var height;
 var tempAppleRadius = 10; //TODO Remove this
+var currentFrame;
+var direction;
 
 // ---------------------
 
@@ -19,11 +21,21 @@ function Hero(x, y){
     // Drawing hero
     this.drawHero = function (ctx)
     {
-        ctx.fillStyle = 'rgba(0, 0, 255, 1.0)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 20, 0, Math.PI*2, true);
-        ctx.closePath();
-        ctx.fill();
+        currentFrame = ++currentFrame%9;
+
+        var runTexture = new Image();
+        runTexture.src = 'img/Run.png';
+        runTexture.onload = function() {
+            if( !this.IsRunning )
+                ctx.drawImage (runTexture, 34 * currentFrame, 0, 34, 42, this.x, this.y, 34, 42);
+        };
+
+        var idleTexture = new Image();
+        idleTexture.src = 'img/Idle.png';
+        idleTexture.onload = function() {
+            if( this.IsRunning )
+                ctx.drawImage(idleTexture, 0, 0, 34, 42, this.x, this.y, 34, 42);
+        };
     };
 
     // hero gravity
@@ -169,7 +181,7 @@ function drawScene(){
     appleFalling();
     hero.drawHero(ctx);
     hero.applyGravity();
-    move();
+    move(direction);
 }
 
 // initialization
@@ -183,21 +195,14 @@ $(function(){
 
     hero = new Hero(100,100);
 
-    var applesCount = 200;
+    var applesCount = 1;
+    currentFrame = 0;
+    direction = 'right';
 
     for (var i=0; i< applesCount; i++){
         newApple();
     }
 
-    $('#scene').mousedown(function(e) {
-        hero.IsRunning = true;
-    });
 
-    $('#scene').mouseup(function(e) {
-        hero.IsRunning = false;
-    });
-
-    setInterval(drawScene, 60);
-    setInterval(appleDisappearance, 3000);
-
+    setInterval(drawScene, 30);
 });
