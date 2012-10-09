@@ -18,6 +18,7 @@ function Hero(x, y){
     this.y = y;
     this.IsRunning = false;
     this.SpeedY = 0;
+    this.IsJumping = false;
 
     // Drawing hero
     this.drawHero = function (ctx, hero)
@@ -56,11 +57,16 @@ function Hero(x, y){
         }
 
         if(this.SpeedY > 0) this.SpeedY -=0.5;
+        else this.IsJumping = false;
     };
 
     this.Jump = function()
     {
-        this.SpeedY = 20;
+        if(!this.IsJumping)
+        {
+            this.SpeedY = 20;
+            this.IsJumping = true;
+        }
     }
 }
 
@@ -227,15 +233,15 @@ $(function(){
         if(x > width / 2) direction = 'right';
         else direction = 'left';
         hero.IsRunning = true;
-    }
+    };
 
     canvas.onmouseup = function(e){
         hero.IsRunning = false;
-    }
+    };
 
     canvas.ondblclick = function (e){
         hero.Jump();
-    }
+    };
 
 
     setInterval(drawScene, 40);
