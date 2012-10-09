@@ -181,11 +181,11 @@ function move(direction){
     if(hero.IsRunning){
         if(direction == 'left' && hero.x > 0)
         {
-            hero.x -= 10;
+            hero.x -= 20;
         }
         if(direction == 'right' && hero.x < width - 30)
         {
-            hero.x += 10;
+            hero.x += 20;
         }
     }
 }
@@ -230,9 +230,15 @@ $(function(){
 
     canvas.onmousedown = function(e){
         var x = e.offsetX;
-        if(x > width / 2) direction = 'right';
+        if(x > hero.x) direction = 'right';
         else direction = 'left';
         hero.IsRunning = true;
+    };
+
+    canvas.onmousemove = function(e){
+        var x = e.offsetX;
+        if(x > hero.x) direction = 'right';
+        else direction = 'left';
     };
 
     canvas.onmouseup = function(e){
