@@ -9,112 +9,6 @@ var direction;
 
 // ---------------------
 
-// Game objects
-
-// Our main hero
-// TODO Maybe this method must be renamed
-function Hero(x, y){
-    this.x = x;
-    this.y = y;
-    this.IsRunning = false;
-    this.SpeedY = 0;
-    this.IsJumping = false;
-
-    // Drawing hero
-    this.drawHero = function (ctx, hero)
-    {
-        currentFrame = ++currentFrame%9;
-
-        var runLeftTexture = new Image();
-        runLeftTexture.src = 'img/RunLeft.png';
-        runLeftTexture.onload = function() {
-            if( hero.IsRunning && direction == 'left')
-                ctx.drawImage (runLeftTexture, 34 * currentFrame, 0, 34, 42, hero.x, hero.y, 34, 42);
-        };
-
-        var runRightTexture = new Image();
-        runRightTexture.src = 'img/RunRight.png';
-        runRightTexture.onload = function() {
-            if( hero.IsRunning && direction == 'right')
-                ctx.drawImage (runRightTexture, 34 * currentFrame, 0, 34, 42, hero.x, hero.y, 34, 42);
-        };
-
-        var idleTexture = new Image();
-        idleTexture.src = 'img/Idle.png';
-        idleTexture.onload = function() {
-            if( !hero.IsRunning )
-                ctx.drawImage(idleTexture, 0, 0, 34, 42, hero.x, hero.y, 34, 42);
-        };
-
-    };
-
-    // hero gravity
-    this.applyGravity = function ()
-    {
-        if ((this.y + 40) < height)
-        {
-            this.y += 10;
-        }
-
-        if(this.SpeedY > 0) this.SpeedY -=0.5;
-        else this.IsJumping = false;
-    };
-
-    this.Jump = function()
-    {
-        if(!this.IsJumping)
-        {
-            this.SpeedY = 20;
-            this.IsJumping = true;
-        }
-    }
-}
-
-// Our Apple (or Acorn)
-// TODO Maybe this method must be renamed
-function Apple(x, y){
-    this.x = x;
-    this.y = y;
-    this.r = 0;
-    this.g = 255;
-    this.b = 0;
-    this.isFalling = false;
-    this.speed = 5+Random(7);
-
-    // Drawing one specified apple
-    this.drawApple = function (ctx)
-    {   var color = Color(this.r, this.g, this.b);
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, tempAppleRadius, 0, Math.PI*2, true);
-        ctx.closePath();
-        ctx.fill();
-    };
-}
-
-// ---------------------
-
-// common functions
-
-// return color string from 3 channels
-function Color(r, g, b)
-{
-    return ('rgba(' + r + ',' + g + ',' + b +', 1.0)').toString();
-}
-
-// returns random value from 0 to max
-function Random(max)
-{
-    return Math.floor((Math.random()*max)+1);
-}
-
-// clear canvas function
-function clear() {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-}
-
-// ---------------------
-
 // function related to objects drawing
 
 // Drawing all apples
@@ -195,6 +89,11 @@ function newApple(){
     var x = (Math.random()*width);
     var y = Math.random()*height/2;
     apples.push(new Apple(x, y));
+}
+
+// clear canvas function
+function clear() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
 //-----------------------------
