@@ -1,10 +1,14 @@
 var canvas, ctx;
 var hero;
 var apples = [];
+var maxAppleCounts = 10;
 var width;
 var height;
 var tempAppleRadius = 10; //TODO Remove this
 var direction;
+var TotalScore;
+var leftControlImage;
+var rightControlImage;
 
 // ---------------------
 
@@ -72,7 +76,7 @@ function appleRipening(){
 function newApple(){
     var x = (Math.random()*width);
     var y = Math.random()*height/2;
-    apples.push(new Apple(x, y));
+    return new Apple(x, y);
 }
 
 function intersects(ctx){
@@ -80,7 +84,21 @@ function intersects(ctx){
 
     for(var i=0; i< apples.length; i++)
     {
-        ctx.fillText(positionOf(apples[i], hero),apples[i].x,apples[i].y);
+        var intersect = positionOf(apples[i], hero);
+        if(intersect == '#WEST#' || intersect == '#EAST#')
+        {
+            apples[i].isDrawing = false;
+            TotalScore+=10;
+        }
+        if(apples[i].isDrawing == false)
+        {
+            apples[i].RebornTimeout -= 50;
+            if(apples[i].RebornTimeout == 0)
+            {
+                apples[i] = newApple();
+            }
+        }
+        //ctx.fillText(intersect,apples[i].x,apples[i].y);
     }
 }
 
@@ -89,10 +107,22 @@ function clear() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
+function gameInfo(ctx)
+{
+    ctx.fillText("Score: " + TotalScore, 600, 20);
+}
+
+function DrawControls(ctx)
+{
+    ctx.drawImage(leftControlImage, 0, 0, 100, 154, 20, height/2 - 154/2, 100, 154);
+    ctx.drawImage(rightControlImage, 0, 0, 100, 154, width - 120, height/2 - 154/2, 100, 154);
+}
+
 //-----------------------------
 
 function drawScene(){
     clear();
+    DrawControls(ctx);
     drawAllApples(ctx);
     appleRipening();
     appleFalling();
@@ -100,6 +130,8 @@ function drawScene(){
     hero.applyGravity();
     hero.Move(direction);
     intersects(ctx);
+    gameInfo(ctx);
+
 }
 
 // initialization
@@ -111,13 +143,20 @@ $(function(){
     width = canvas.width;
     height = canvas.height;
 
+    leftControlImage = new Image();
+    leftControlImage.src = 'img/left.png';
+
+    rightControlImage = new Image();
+    rightControlImage.src = 'img/right.png';
+
+
     hero = new Hero(300,300);
 
-    var applesCount = 5;
     direction = 'right';
+    TotalScore = 0;
 
-    for (var i=0; i< applesCount; i++){
-        newApple();
+    for (var i=0; i< maxAppleCounts; i++){
+        apples.push(newApple());
     }
 
     canvas.onmousedown = function(e){
