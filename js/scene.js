@@ -75,6 +75,15 @@ function newApple(){
     apples.push(new Apple(x, y));
 }
 
+function intersects(ctx){
+    ctx.font="20px Georgia";
+
+    for(var i=0; i< apples.length; i++)
+    {
+        ctx.fillText(positionOf(apples[i], hero),apples[i].x,apples[i].y);
+    }
+}
+
 // clear canvas function
 function clear() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -90,6 +99,7 @@ function drawScene(){
     hero.drawHero(ctx);
     hero.applyGravity();
     hero.Move(direction);
+    intersects(ctx);
 }
 
 // initialization
@@ -103,7 +113,7 @@ $(function(){
 
     hero = new Hero(300,300);
 
-    var applesCount = 20;
+    var applesCount = 5;
     direction = 'right';
 
     for (var i=0; i< applesCount; i++){

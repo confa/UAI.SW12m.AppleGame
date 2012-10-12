@@ -15,6 +15,9 @@ function Hero(x, y){
     this.x = x;
     this.y = y;
 
+    this.Width = heroWidth;
+    this.Height = heroHeight;
+
     // hero states
     this.IsRunning = false;
     this.IsJumping = false;
@@ -44,6 +47,11 @@ function Hero(x, y){
     // Drawing hero
     this.drawHero = function (ctx)
     {
+        ctx.font="10px Georgia";
+        ctx.fillStyle = Color(255,255,255);
+        ctx.fillText("X: " + self.x.toFixed(),10,10);
+        ctx.fillText("Y: " + self.y.toFixed(),10,20);
+
         self.currentFrame = (self.currentFrame+1)%frameCount;
         if( !self.IsRunning )
             ctx.drawImage(self.idleTexture, 0, 0, 34, 42, self.x, self.y, heroWidth, heroHeight);

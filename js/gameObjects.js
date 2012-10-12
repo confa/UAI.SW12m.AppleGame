@@ -1,3 +1,6 @@
+var appleWidth = 50;
+var appleHeight = 50;
+
 // Our Apple (or Acorn)
 function Apple(x, y){
     this.x = x;
@@ -5,6 +8,8 @@ function Apple(x, y){
     this.r = 0;
     this.g = 255;
     this.b = 0;
+    this.Width = appleWidth;
+    this.Height = appleHeight;
     this.isFalling = false;
     this.speed = 5+Random(7);
 
@@ -15,6 +20,6 @@ function Apple(x, y){
     // Drawing one specified apple
     this.drawApple = function (ctx)
     {
-        ctx.drawImage(self.appleTexture, 0, 0, 50, 50, self.x, self.y, 50, 50);
+        ctx.drawImage(self.appleTexture, 0, 0, appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
     };
 }
