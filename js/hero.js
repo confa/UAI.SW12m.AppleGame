@@ -1,57 +1,98 @@
+// constants
+var frameWidth = 34;
+var heroWidth = 60;
+var heroHeight = 75;
+var maxSpeedY = 20;
+var maxSpeedX = 15;
+var gravity = 9.8;
+var frameCount = 9;
+
 // Our main hero
 function Hero(x, y){
+    var self = this; // pointer on current hero instance
+
+    // coordinates
     this.x = x;
     this.y = y;
+
+    // hero states
     this.IsRunning = false;
-    this.SpeedY = 0;
     this.IsJumping = false;
 
+    // hero speeds
+    this.SpeedY = 0;
+    this.SpeedX = maxSpeedX;
+
+    // direction for moving
+    this.direction = 'right';
+
+    // current frame for drawing
+    this.currentFrame = 0;
+
+    // texture for run left // TODO need to used only one run texture and just mirror it
+    self.runLeftTexture = new Image();
+    self.runLeftTexture.src = 'img/RunLeft.png';
+
+    // texture for run right
+    self.runRightTexture = new Image();
+    self.runRightTexture.src = 'img/RunRight.png';
+
+    // texture for idle
+    self.idleTexture = new Image();
+    self.idleTexture.src = 'img/Idle.png';
+
     // Drawing hero
-    this.drawHero = function (ctx, hero)
+    this.drawHero = function (ctx)
     {
-        currentFrame = ++currentFrame%9;
-
-        var runLeftTexture = new Image();
-        runLeftTexture.src = 'img/RunLeft.png';
-        runLeftTexture.onload = function() {
-            if( hero.IsRunning && direction == 'left')
-                ctx.drawImage (runLeftTexture, 34 * currentFrame, 0, 34, 42, hero.x, hero.y, 34, 42);
-        };
-
-        var runRightTexture = new Image();
-        runRightTexture.src = 'img/RunRight.png';
-        runRightTexture.onload = function() {
-            if( hero.IsRunning && direction == 'right')
-                ctx.drawImage (runRightTexture, 34 * currentFrame, 0, 34, 42, hero.x, hero.y, 34, 42);
-        };
-
-        var idleTexture = new Image();
-        idleTexture.src = 'img/Idle.png';
-        idleTexture.onload = function() {
-            if( !hero.IsRunning )
-                ctx.drawImage(idleTexture, 0, 0, 34, 42, hero.x, hero.y, 34, 42);
-        };
-
+        self.currentFrame = (self.currentFrame+1)%frameCount;
+        if( !self.IsRunning )
+            ctx.drawImage(self.idleTexture, 0, 0, 34, 42, self.x, self.y, heroWidth, heroHeight);
+        else{
+            if(self.direction == 'left')
+                ctx.drawImage (self.runLeftTexture, frameWidth * self.currentFrame, 0,
+                    34, 42, self.x, self.y, heroWidth, heroHeight);
+            else
+                ctx.drawImage (self.runRightTexture, frameWidth * self.currentFrame, 0,
+                    34, 42, self.x, self.y, heroWidth, heroHeight);
+        }
     };
 
     // hero gravity
     this.applyGravity = function ()
     {
-        if ((this.y + 40) < height)
+        if ((self.y) < height - 12 - heroWidth)
         {
-            this.y += 10;
+            self.y += gravity;
         }
 
-        if(this.SpeedY > 0) this.SpeedY -=0.5;
-        else this.IsJumping = false;
+        if(self.SpeedY > 0) self.SpeedY -=0.5;
+        else self.IsJumping = false;
     };
 
+    // hero jumping
     this.Jump = function()
     {
-        if(!this.IsJumping)
+        if(!self.IsJumping)
         {
-            this.SpeedY = 20;
-            this.IsJumping = true;
+            self.SpeedY = maxSpeedY;
+            self.IsJumping = true;
+        }
+    }
+
+    // hero moving
+    this.Move = function(direction){
+        self.y -= self.SpeedY;
+        self.direction = direction;
+
+        if(self.IsRunning){
+            if(direction == 'left' && self.x > 0)
+            {
+                self.x -= maxSpeedX;
+            }
+            if(direction == 'right' && self.x < width - heroWidth)
+            {
+                self.x += maxSpeedX;
+            }
         }
     }
 }

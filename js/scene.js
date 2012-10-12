@@ -4,7 +4,6 @@ var apples = [];
 var width;
 var height;
 var tempAppleRadius = 10; //TODO Remove this
-var currentFrame;
 var direction;
 
 // ---------------------
@@ -30,7 +29,7 @@ function appleFalling()
 {
     for (var i=0; i< apples.length; i++)
     {
-        if(apples[i].isFalling && apples[i].y < height - tempAppleRadius) {
+        if(apples[i].isFalling && apples[i].y < height - 50) {
             apples[i].y += apples[i].speed;
         }
         else
@@ -69,21 +68,6 @@ function appleRipening(){
     }
 }
 
-// hero moving
-function move(direction){
-    hero.y -= hero.SpeedY;
-    if(hero.IsRunning){
-        if(direction == 'left' && hero.x > 0)
-        {
-            hero.x -= 20;
-        }
-        if(direction == 'right' && hero.x < width - 30)
-        {
-            hero.x += 20;
-        }
-    }
-}
-
 // Added new apple on tree
 function newApple(){
     var x = (Math.random()*width);
@@ -103,9 +87,9 @@ function drawScene(){
     drawAllApples(ctx);
     appleRipening();
     appleFalling();
-    hero.drawHero(ctx, hero);
+    hero.drawHero(ctx);
     hero.applyGravity();
-    move(direction);
+    hero.Move(direction);
 }
 
 // initialization
@@ -119,8 +103,7 @@ $(function(){
 
     hero = new Hero(300,300);
 
-    var applesCount = 1;
-    currentFrame = 0;
+    var applesCount = 20;
     direction = 'right';
 
     for (var i=0; i< applesCount; i++){

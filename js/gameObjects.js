@@ -8,13 +8,13 @@ function Apple(x, y){
     this.isFalling = false;
     this.speed = 5+Random(7);
 
+    var self = this;
+    this.appleTexture = new Image();
+    this.appleTexture.src = 'img/apple.png';
+
     // Drawing one specified apple
     this.drawApple = function (ctx)
-    {   var color = Color(this.r, this.g, this.b);
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, tempAppleRadius, 0, Math.PI*2, true);
-        ctx.closePath();
-        ctx.fill();
+    {
+        ctx.drawImage(self.appleTexture, 0, 0, 50, 50, self.x, self.y, 50, 50);
     };
 }
