@@ -4,7 +4,6 @@ var apples = [];
 var maxAppleCounts = 10;
 var width;
 var height;
-var tempAppleRadius = 10; //TODO Remove this
 var direction;
 var TotalScore;
 var leftControlImage;
@@ -33,7 +32,7 @@ function appleFalling()
 {
     for (var i=0; i< apples.length; i++)
     {
-        if(apples[i].isFalling && apples[i].y < height - 50) {
+        if(apples[i].isFalling && apples[i].y < height - apples[i].Height) {
             apples[i].y += apples[i].speed;
         }
         else
@@ -48,8 +47,8 @@ function appleDisappearance()
 {
     for (var i=0; i< apples.length; i++)
     {
-        if(!apples[i].isFalling && apples[i].y < height - tempAppleRadius*2 && apples[i].r >=250) {
-            apples.deleteCell(i);
+        if(!apples[i].isFalling && apples[i].y + apples[i].Height >= height && apples[i].r >=250) {
+            apples[i].isDrawing = false;
         }
     }
 }
@@ -125,9 +124,10 @@ function drawScene(){
     DrawControls(ctx);
     drawAllApples(ctx);
     appleRipening();
+    appleDisappearance();
     appleFalling();
-    hero.drawHero(ctx);
-    hero.applyGravity();
+    hero.DrawHero(ctx);
+    hero.ApplyGravity();
     hero.Move(direction);
     intersects(ctx);
     gameInfo(ctx);
@@ -161,14 +161,14 @@ $(function(){
 
     canvas.onmousedown = function(e){
         var x = e.offsetX;
-        if(x > hero.x) direction = 'right';
+        if(x > width/2) direction = 'right';
         else direction = 'left';
         hero.IsRunning = true;
     };
 
     canvas.onmousemove = function(e){
         var x = e.offsetX;
-        if(x > hero.x) direction = 'right';
+        if(x > width/2) direction = 'right';
         else direction = 'left';
     };
 

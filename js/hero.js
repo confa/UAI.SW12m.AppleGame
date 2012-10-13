@@ -45,7 +45,7 @@ function Hero(x, y){
     self.idleTexture.src = 'img/Idle.png';
 
     // Drawing hero
-    this.drawHero = function (ctx)
+    this.DrawHero = function (ctx)
     {
         ctx.font="10px Georgia";
         ctx.fillStyle = Color(255,255,255);
@@ -66,9 +66,9 @@ function Hero(x, y){
     };
 
     // hero gravity
-    this.applyGravity = function ()
+    this.ApplyGravity = function ()
     {
-        if ((self.y) < height - 12 - heroWidth)
+        if ((self.y) < height - heroHeight)
         {
             self.y += gravity;
         }
