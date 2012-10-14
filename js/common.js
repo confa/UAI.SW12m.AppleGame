@@ -17,6 +17,20 @@ function Distance(firstX, firstY, secondX, secondY)
     return Math.sqrt(Math.pow(secondX-firstX,2) + Math.pow(secondY-firstY,2));
 }
 
+function changeopacity( imageobject, opacity ) {
+
+    var object = imageobject.style;
+
+    object.opacity = ( opacity / 100 );
+
+    object.MozOpacity = ( opacity / 100 );
+
+    object.KhtmlOpacity = ( opacity / 100 );
+
+    object.filter = "alpha(opacity=" + opacity + ")";
+
+}
+
 // intersect function
 // two object must has properties x, y, Width, Height
 function positionOf(point, relativeTo) {
