@@ -32,8 +32,8 @@ function appleFalling()
 {
     for (var i=0; i< apples.length; i++)
     {
-        if(apples[i].isFalling && apples[i].y < height - apples[i].Height) {
-            apples[i].y += apples[i].speed;
+        if(apples[i].isFalling && apples[i].y < height - apples[i].Height - apples[i].ySpeed) {
+
         }
         else
         {
@@ -75,7 +75,9 @@ function appleRipening(){
 function newApple(){
     var x = (Math.random()*width);
     var y = Math.random()*height/2;
-    return new Apple(x, y);
+    apple = new Apple(x, y);
+    apple.setGravity(gravity);
+    return apple;
 }
 
 function intersects(ctx){

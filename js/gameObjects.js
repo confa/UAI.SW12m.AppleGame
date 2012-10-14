@@ -6,6 +6,8 @@ var rebornTimeout = 1000;
 function Apple(x, y){
     this.x = x;
     this.y = y;
+    this.ySpeed = 0;
+    this.gravity = 0;
     this.r = 0;
     this.g = 255;
     this.b = 0;
@@ -23,7 +25,17 @@ function Apple(x, y){
     // Drawing one specified apple
     this.drawApple = function (ctx)
     {
-        if(self.isDrawing)
+        if(self.isDrawing) {
             ctx.drawImage(self.appleTexture, 0, 0, appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+            if (this.isFalling) {
+                this.y += this.ySpeed;
+                this.ySpeed += this.gravity;
+            }
+        }
+    };
+
+    this.setGravity = function (gravity)
+    {
+        this.gravity = gravity/6;
     };
 }
