@@ -91,6 +91,10 @@ function intersects(ctx){
             apples[i].isDrawing = false;
             TotalScore+=10;
         }
+        if(intersect == '#NORTH#')
+        {
+            hero.HP -= 10;
+        }
         if(apples[i].isDrawing == false)
         {
             apples[i].RebornTimeout -= 50;
@@ -111,6 +115,7 @@ function clear() {
 function gameInfo(ctx)
 {
     ctx.fillText("Score: " + TotalScore, 600, 20);
+    ctx.fillText("Health: " + hero.HP, 20, 20);
 }
 
 function DrawControls(ctx)

@@ -14,6 +14,7 @@ function Hero(x, y){
     // coordinates
     this.x = x;
     this.y = y;
+    this.HP = 100;
 
     this.Width = heroWidth;
     this.Height = heroHeight;
