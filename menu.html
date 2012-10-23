@@ -1,0 +1,71 @@
+<html>
+
+<head>
+<title>Выпадающее меню на javascript</title>
+<style>
+
+body { font-family: verdana, sans-serif; font-size:13px; margin:0px; padding:0px;
+background: #F8F8FF;}
+
+.menu { background:#C4C2F8; width:10%; }
+
+#block_menu { margin-left:5px; }
+.punkt {float:left; padding: 1px 1px 0px 1px; background:transparent; position:relative; cursor:pointer; }
+.punkt div {padding:2px 7px 2px 7px;}
+div.list_punkts {background:#C6E0B6; position:absolute; top:26px; left:0px;
+display:none; padding:0px; width:180px; border:solid 1px #000; }
+div.list_punkts div a:hover div.podpunkt { background:#7C58DC; color:#fff; }
+.footer_menu { clear:both; }*/
+
+</style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+function overPunkt(obj_listPunkt)
+{ 
+
+/* делаем выпадающее меню видимым */ 
+obj_listPunkt.childNodes[1].style.display="block"; 
+
+/* ставим выпадающее меню ниже пункта меню */
+obj_listPunkt.childNodes[1].style.top=obj_listPunkt.offsetHeight; 
+
+/*дальше идет оформление пункта меню */ 
+obj_listPunkt.style.background="#8080FF";
+
+/* запоминаем цвет текста пункта меню, чтоб потом его можно было восстановить */ 
+color_text=obj_listPunkt.style.color;
+obj_listPunkt.style.color="#dfd";
+}
+function outPunkt(obj_listPunkt)
+{ 
+
+/* делаем выпадающее меню невидимым */ 
+obj_listPunkt.childNodes[1].style.display="none";
+
+/* дальше восстанавливаем первоначальный внешний вид пункта меню */
+obj_listPunkt.style.background="transparent";
+
+}
+
+</script>
+
+<div class="menu">
+<div id="block_menu">
+
+<div class="punkt" onMouseOver="overPunkt(this);" onMouseOut="outPunkt(this);"><div>MENU</div
+><div class="list_punkts"><div class="kont">
+<a href="#"><div class="podpunkt"><div> New game</div></div></a> 
+<a href="#"><div class="podpunkt"><div>Save gamesу</div></div></a>
+<a href="#"><div class="podpunkt"><div>Pause</div></div></a>
+<a href="#"><div class="podpunkt"><div>Exit</div></div></a>
+</div></div>
+</div>
+</ Div>
+<div class="footer_menu"> </ div>
+</ Div>
+
+</ Body>
+</ Html>
