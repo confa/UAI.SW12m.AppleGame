@@ -93,7 +93,7 @@ function intersects(ctx){
         }
         if(intersect == '#NORTH#')
         {
-            hero.HP -= 10;
+            hero.HP -= 3;
         }
         if(apples[i].isDrawing == false)
         {
@@ -114,8 +114,38 @@ function clear() {
 
 function gameInfo(ctx)
 {
-    ctx.fillText("Score: " + TotalScore, 600, 20);
-    ctx.fillText("Health: " + hero.HP, 20, 20);
+    //ctx.fillText("Score: " + TotalScore, 600, 20);
+    //ctx.fillText("Health: " + hero.HP, 20, 20);
+    var critical = $('critical-hp');
+    var medium = $('medium-hp');
+    var normal = $('normal-hp');
+    var score = $('score');
+    score.textContent= "Score:" + TotalScore;
+
+    if(hero.HP < 30)
+    {
+        critical.removeAttribute('hidden');
+        medium.setAttribute('hidden', "hidden");
+        normal.setAttribute('hidden', "hidden");
+
+        critical.style.width = hero.HP + "%";
+    }
+    else if(hero.HP < 60)
+    {
+        medium.removeAttribute('hidden');
+        critical.setAttribute('hidden', "hidden");
+        normal.setAttribute('hidden', "hidden");
+
+        medium.style.width = hero.HP + "%";
+    }
+    else
+    {
+        normal.removeAttribute('hidden');
+        medium.setAttribute('hidden', "hidden");
+        critical.setAttribute('hidden', "hidden");
+
+        normal.style.width = hero.HP + "%";
+    }
 }
 
 function DrawControls(ctx)
