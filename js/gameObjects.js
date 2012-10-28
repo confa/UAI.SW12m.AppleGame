@@ -27,10 +27,6 @@ function Apple(x, y){
     {
         if(self.isDrawing) {
             ctx.drawImage(self.appleTexture, 0, 0, appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
-            if (this.isFalling) {
-                this.y += this.ySpeed;
-                this.ySpeed += this.gravity;
-            }
         }
     };
 

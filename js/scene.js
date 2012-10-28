@@ -32,11 +32,17 @@ function appleFalling()
 {
     for (var i=0; i< apples.length; i++)
     {
-        if(apples[i].isFalling && apples[i].y < height - apples[i].Height - apples[i].ySpeed) {
-
+        var tempY = apples[i].y + apples[i].ySpeed;
+        if(apples[i].isFalling && tempY <= height - apples[i].Height) {
+            apples[i].y += apples[i].ySpeed;
+            apples[i].ySpeed += apples[i].gravity;
         }
         else
         {
+            if(apples[i].isFalling)
+            {
+                apples[i].y = height - apples[i].Height;
+            }
             apples[i].isFalling = false;
         }
     }
@@ -93,7 +99,7 @@ function intersects(ctx){
         }
         if(intersect == '#NORTH#')
         {
-            hero.HP -= 10;
+            hero.HP -= 3;
         }
         if(apples[i].isDrawing == false)
         {
@@ -114,8 +120,29 @@ function clear() {
 
 function gameInfo(ctx)
 {
-    ctx.fillText("Score: " + TotalScore, 600, 20);
-    ctx.fillText("Health: " + hero.HP, 20, 20);
+    var bar = $('health');
+    var score = $('score');
+    score.textContent= "Score:" + TotalScore;
+
+    bar.removeClassName('bar-danger');
+    bar.removeClassName('bar-warning');
+    bar.removeClassName('bar-success');
+
+    if(hero.HP < 30)
+    {
+        bar.addClassName('bar bar-danger');
+        bar.style.width = hero.HP + "%";
+    }
+    else if(hero.HP < 60)
+    {
+        bar.addClassName('bar bar-warning');
+        bar.style.width = hero.HP + "%";
+    }
+    else
+    {
+        bar.addClassName('bar bar-success');
+        bar.style.width = hero.HP + "%";
+    }
 }
 
 function DrawControls(ctx)
@@ -155,7 +182,6 @@ $(function(){
 
     rightControlImage = new Image();
     rightControlImage.src = 'img/right.png';
-
 
     hero = new Hero(300,300);
 

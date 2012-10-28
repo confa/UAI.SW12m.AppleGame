@@ -21,11 +21,11 @@ function changeopacity( imageobject, opacity ) {
 
     var object = imageobject.style;
 
-    object.opacity = ( opacity / 100 );
+    object.opacity = opacity;
 
-    object.MozOpacity = ( opacity / 100 );
+    object.MozOpacity = opacity;
 
-    object.KhtmlOpacity = ( opacity / 100 );
+    object.KhtmlOpacity = opacity;
 
     object.filter = "alpha(opacity=" + opacity + ")";
 
@@ -54,7 +54,7 @@ function positionOf(point, relativeTo) {
 
     var distance = Distance(firstCenterX, firstCenterY, secondCenterX, secondCenterY);
 
-    if(distance < (point.Width/3 + relativeTo.Width/3) || (distance < point.Height/3 + relativeTo.Height/3))
+    if(distance < (point.Width/2 + relativeTo.Width/2) || (distance < point.Height/2 + relativeTo.Height/2))
     {
         return direction;
     }
