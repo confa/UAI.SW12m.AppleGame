@@ -183,6 +183,7 @@ $(function(){
     rightControlImage = new Image();
     rightControlImage.src = 'img/right.png';
 
+
     hero = new Hero(300,300);
 
     direction = 'right';
