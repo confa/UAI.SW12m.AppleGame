@@ -1,7 +1,7 @@
 var canvas, ctx;
 var hero;
 var apples = [];
-var maxAppleCounts = 10;
+var maxAppleCounts = 100;
 var width;
 var height;
 var direction;
@@ -91,16 +91,21 @@ function intersects(ctx){
 
     for(var i=0; i< apples.length; i++)
     {
+        // define intersect
         var intersect = positionOf(apples[i], hero);
+        // if intersect from left or right side - catch apple and raise Score
         if(intersect == '#WEST#' || intersect == '#EAST#')
         {
             apples[i].isDrawing = false;
             TotalScore+=10;
         }
+        // if intersect from left or right side - catch apple and decrease HP
         if(intersect == '#NORTH#')
         {
+            apples[i].isDrawing = false;
             hero.HP -= 3;
         }
+        // replace catched apples with new ones
         if(apples[i].isDrawing == false)
         {
             apples[i].RebornTimeout -= 50;
@@ -173,6 +178,18 @@ function drawScene(){
 $(function(){
     canvas = document.getElementById('scene');
     ctx = canvas.getContext('2d');
+
+    // lock scroll position, but retain settings for later
+    var scrollPosition = [
+        this.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+        this.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop
+    ];
+    var html = jQuery('html'); // it would make more sense to apply this to body, but IE7 won't have that
+    html.data('scroll-position', scrollPosition);
+    html.data('previous-overflow', html.css('overflow'));
+    html.css('overflow', 'hidden');
+    window.scrollTo(scrollPosition[0], scrollPosition[1]);
+
 
     width = canvas.width;
     height = canvas.height;
