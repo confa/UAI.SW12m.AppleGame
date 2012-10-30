@@ -190,6 +190,7 @@ $(function(){
     html.css('overflow', 'hidden');
     window.scrollTo(scrollPosition[0], scrollPosition[1]);
 
+    canvas.onselectstart = function () { return false; }
 
     width = canvas.width;
     height = canvas.height;
