@@ -235,6 +235,11 @@ $(function(){
     canvas.addEventListener('touchmove', function(event) {
         event.preventDefault();
         var touch = event.touches[0];
+
+        if (touch.length > 1) {
+            hero.Jump();
+        }
+
         var x = touch.pageX;
         if(x > width/2) direction = 'right';
         else direction = 'left';
