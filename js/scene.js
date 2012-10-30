@@ -232,6 +232,27 @@ $(function(){
         hero.Jump();
     };
 
+    canvas.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+        var touch = event.touches[0];
+        var x = touch.pageX;
+        if(x > width/2) direction = 'right';
+        else direction = 'left';
+    }, false);
+
+    canvas.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        var touch = event.touches[0];
+        var x = touch.pageX;
+        if(x > width/2) direction = 'right';
+        else direction = 'left';
+        hero.IsRunning = true;
+    }, false);
+
+    canvas.addEventListener('touchend', function(event) {
+        event.preventDefault();
+        hero.IsRunning = false;
+    }, false);
 
     setInterval(drawScene, 40);
 });
