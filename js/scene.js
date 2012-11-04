@@ -1,7 +1,7 @@
 var canvas, ctx;
 var hero;
 var apples = [];
-var maxAppleCounts = 100;
+var maxAppleCounts = 30;
 var width;
 var height;
 var direction;
@@ -103,7 +103,7 @@ function intersects(ctx){
         if(intersect == '#NORTH#')
         {
             apples[i].isDrawing = false;
-            hero.HP -= 3;
+            hero.HP -= 7;
         }
         // replace catched apples with new ones
         if(apples[i].isDrawing == false)
