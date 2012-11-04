@@ -54,7 +54,7 @@ function positionOf(point, relativeTo) {
 
     var distance = Distance(firstCenterX, firstCenterY, secondCenterX, secondCenterY);
 
-    if(distance < (point.Width/3 + relativeTo.Width/3) || (distance < point.Height/3 + relativeTo.Height/3))
+    if(distance < (point.Width + relativeTo.Width) || (distance < point.Height + relativeTo.Height))
     {
         return direction;
     }

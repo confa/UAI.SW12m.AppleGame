@@ -13,7 +13,56 @@ describe("Hero tests", function(){
         hero = new Hero(100,100);
     });
 
+    describe("Intersect function", function(){
+        var apple;
+
+        beforeEach(function(){
+            // arrange
+            apple = new Apple(0, 0);
+            hero = new Hero(0, 0);
+            apple.Height = 10;
+            hero.Height = 10;
+            apple.Width = 10;
+            hero.Width = 10;
+        });
+
+        it("Should return #WEST# when west intersect occurred", function(){
+            hero.x = 50;
+            apple.x = 60;
+
+            expect(positionOf(hero, apple)).toEqual("#WEST#");
+        });
+
+        it("Should return #EAST# when west intersect occurred", function(){
+            hero.x = 70;
+            apple.x = 60;
+
+            expect(positionOf(hero, apple)).toEqual("#EAST#");
+        });
+
+        it("Should return #NORTH# when west intersect occurred", function(){
+            hero.y = 40;
+            apple.y = 50;
+
+            expect(positionOf(hero, apple)).toEqual("#NORTH#");
+        });
+
+        it("Should return #SOUTH# when west intersect occurred", function(){
+            hero.y = 60;
+            apple.y = 50;
+
+            expect(positionOf(hero, apple)).toEqual("#SOUTH#");
+        });
+    });
+
     describe("Hero jumping", function(){
+
+        beforeEach(function() {
+            // arrange
+            height = 100;
+            gravity = 9.8;
+        });
+
         it("Should start jumping when is called", function(){
             // act
             hero.Jump();
@@ -22,6 +71,28 @@ describe("Hero tests", function(){
             expect(hero.SpeedY).toEqual(maxSpeedY);
             expect(hero.IsJumping).toBeTruthy();
         });
+
+        it("Should decrease speed on lambda when is jumping", function(){
+            // arrange
+            hero.SpeedY = 0;
+
+            // act
+            hero.Jump();
+            var previousSpeedY = hero.SpeedY;
+            hero.ApplyGravity();
+
+            // assert
+            expect(hero.SpeedY).toEqual(previousSpeedY - fallingLambda);
+        });
+
+        it("Should stop jumping when speed is zero", function(){
+            // act
+            hero.SpeedY = 0;
+            hero.ApplyGravity();
+
+            expect(hero.IsJumping).toBeFalsy();
+        });
+
     });
 
     describe("Hero movements", function(){
@@ -86,4 +157,5 @@ describe("Hero tests", function(){
            expect(hero.x).toEqual(previousX);
        });
     });
+
 });

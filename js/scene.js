@@ -86,13 +86,24 @@ function newApple(){
     return apple;
 }
 
+function boundingRect(object)
+{
+    var tempObject = new Object();
+    tempObject.Height = 0.5 * object.Height;
+    tempObject.Width = 0.3 * object.Width;
+    tempObject.x = object.x;
+    tempObject.y = object.y;
+
+    return tempObject;
+}
+
 function intersects(ctx){
     ctx.font="20px Georgia";
 
     for(var i=0; i< apples.length; i++)
     {
         // define intersect
-        var intersect = positionOf(apples[i], hero);
+        var intersect = positionOf(boundingRect(apples[i]), boundingRect(hero));
         // if intersect from left or right side - catch apple and raise Score
         if(intersect == '#WEST#' || intersect == '#EAST#')
         {

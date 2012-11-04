@@ -2,10 +2,11 @@
 var frameWidth = 34;
 var heroWidth = 60;
 var heroHeight = 75;
-var maxSpeedY = 20;
+var maxSpeedY = 15;
 var maxSpeedX = 15;
 var gravity = 9.8;
 var frameCount = 9;
+var fallingLambda = 0.5;
 
 // Our main hero
 function Hero(x, y){
@@ -69,12 +70,21 @@ function Hero(x, y){
     // hero gravity
     this.ApplyGravity = function ()
     {
-        if ((self.y) < height - heroHeight)
+        var tempY = self.y;
+        tempY -= self.SpeedY;
+        tempY += gravity;
+
+        if(tempY <= height - self.Height)
         {
-            self.y += gravity;
+            self.y = tempY;
+        }
+        else
+        {
+            self.y = height - self.Height;
+            self.IsJumping = false;
         }
 
-        if(self.SpeedY > 0) self.SpeedY -=0.5;
+        if(self.SpeedY > 0) self.SpeedY -= fallingLambda;
         else self.IsJumping = false;
     };
 
