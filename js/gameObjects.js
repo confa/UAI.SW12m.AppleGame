@@ -1,6 +1,8 @@
 var appleWidth = 50;
 var appleHeight = 50;
 var rebornTimeout = 1000;
+var appleTexture = new Image();
+appleTexture.src = 'img/apple.png';
 
 // Our Apple (or Acorn)
 function Apple(x, y){
@@ -19,14 +21,12 @@ function Apple(x, y){
     this.speed = 5+Random(7);
 
     var self = this;
-    this.appleTexture = new Image();
-    this.appleTexture.src = 'img/apple.png';
 
     // Drawing one specified apple
     this.drawApple = function (ctx)
     {
         if(self.isDrawing) {
-            ctx.drawImage(self.appleTexture, 0, 0, appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+            ctx.drawImage(appleTexture, 0, 0, appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
         }
     };
 
