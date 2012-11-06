@@ -152,3 +152,37 @@ describe("Hero tests", function(){
     });
 
 });
+
+
+describe("Gravity tests", function(){
+
+    var hero;
+    var apple;
+
+    describe("Hero gravity function", function(){
+        beforeEach(function(){
+            hero = new Hero(0, 0);
+        });
+
+        it("Should return value less then before gravity applying", function(){
+            var before = hero.y;
+            hero.ApplyGravity();
+
+            expect(before).toBeLessThan(hero.y);
+        });
+    });
+
+    describe("Apple gravity function", function(){
+        beforeEach(function(){
+            apple = new Apple(0, 0);
+        });
+
+        it("Should return value less then before gravity applying", function(){
+            var before = apple.y;
+            apple.setGravity(10);
+            apple.applyGravity();
+
+            expect(before).toBeLessThan(apple.y);
+        });
+    });
+});

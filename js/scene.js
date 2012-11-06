@@ -34,8 +34,7 @@ function appleFalling()
     {
         var tempY = apples[i].y + apples[i].ySpeed;
         if(apples[i].isFalling && tempY <= height - apples[i].Height) {
-            apples[i].y += apples[i].ySpeed;
-            apples[i].ySpeed += apples[i].gravity;
+            apples[i].applyGravity();
         }
         else
         {
@@ -144,7 +143,7 @@ function gameInfo(ctx)
     bar.removeClassName('bar-warning');
     bar.removeClassName('bar-success');
 
-    if(hero.HP < 0) {
+    if(hero.HP <= 0) {
         if (confirm("You lose. want to try again?")) {
             hero.HP = 100;
             TotalScore = 0;
