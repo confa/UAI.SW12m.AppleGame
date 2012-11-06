@@ -144,7 +144,13 @@ function gameInfo(ctx)
     bar.removeClassName('bar-warning');
     bar.removeClassName('bar-success');
 
-    if(hero.HP < 30)
+    if(hero.HP < 0) {
+        if (confirm("You lose. want to try again?")) {
+            hero.HP = 100;
+            TotalScore = 0;
+        }
+    }
+    else if(hero.HP < 30)
     {
         bar.addClassName('bar bar-danger');
         bar.style.width = hero.HP + "%";
