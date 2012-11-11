@@ -35,4 +35,10 @@ function Apple(x, y){
     {
         this.gravity = gravity/6;
     };
+
+    this.applyGravity = function()
+    {
+        this.ySpeed += this.gravity;
+        this.y += this.ySpeed;
+    };
 }
