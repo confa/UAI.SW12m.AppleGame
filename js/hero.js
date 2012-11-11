@@ -72,6 +72,7 @@ function Hero(x, y){
         if(tempY <= height - self.Height)
         {
             self.y = tempY;
+            self.SpeedY -= fallingLambda;
         }
         else
         {
@@ -79,8 +80,6 @@ function Hero(x, y){
             self.IsJumping = false;
         }
 
-        if(self.SpeedY > 0) self.SpeedY -= fallingLambda;
-        else self.IsJumping = false;
     };
 
     // hero jumping

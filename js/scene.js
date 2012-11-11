@@ -324,9 +324,9 @@ function AnimateControls()
     },4000, function(){
         leftControl.animate({
             opacity: 0
-        },4000), function(){
+        },4000, function(){
             leftControl.remove();
-        }});
+        })});
 
     rightControl.animate({
         opacity: 1
