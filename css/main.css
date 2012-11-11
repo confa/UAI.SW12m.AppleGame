@@ -1,4 +1,5 @@
 /* general styles */
+
 *{
     margin:0;
     padding:0;
@@ -13,6 +14,12 @@ body {
     color:#fff;
     font:14px/1.3 Arial,sans-serif;
     min-height:1000px;
+
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .container {
@@ -66,6 +73,27 @@ footer .stuts span {
 
 h3 {
     text-align:center;
+}
+
+#gameInfo{
+    position: absolute;
+    top: 80px;
+}
+
+#controls{
+    position: absolute;
+}
+
+#leftControl
+{
+    position: relative;
+    left:10px;
+    top: 150px;
+}
+
+#rightControl {
+    position: relative;
+    left: 690px;
 }
 
 /* tutorial styles */

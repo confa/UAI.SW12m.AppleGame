@@ -17,18 +17,13 @@ function Distance(firstX, firstY, secondX, secondY)
     return Math.sqrt(Math.pow(secondX-firstX,2) + Math.pow(secondY-firstY,2));
 }
 
-function changeopacity( imageobject, opacity ) {
+function changeOpacity( imageobject, opacity ) {
 
     var object = imageobject.style;
-
     object.opacity = opacity;
-
     object.MozOpacity = opacity;
-
     object.KhtmlOpacity = opacity;
-
     object.filter = "alpha(opacity=" + opacity + ")";
-
 }
 
 // intersect function

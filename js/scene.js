@@ -6,8 +6,7 @@ var width;
 var height;
 var direction;
 var TotalScore;
-var leftControlImage;
-var rightControlImage;
+var gameOver;
 
 // ---------------------
 
@@ -16,10 +15,10 @@ var rightControlImage;
 // Drawing all apples
 function drawAllApples(ctx)
 {
-    for (var i=0; i<apples.length; i++)
+    Enumerable.From(apples).ForEach(function(value)
     {
-        apples[i].drawApple(ctx);
-    }
+        value.drawApple(ctx);
+    });
 }
 
 // ------------------------
@@ -81,7 +80,7 @@ function appleRipening(){
 function newApple(){
     var x = (Math.random()*width);
     var y = Math.random()*height/2;
-    apple = new Apple(x, y);
+    var apple = new Apple(x, y);
     apple.setGravity(gravity);
     return apple;
 }
@@ -98,35 +97,44 @@ function boundingRect(object)
 }
 
 function intersects(ctx){
-    ctx.font="20px Georgia";
 
-    for(var i=0; i< apples.length; i++)
+    Enumerable.From(apples).ForEach(function(apple, index)
     {
         // define intersect
-        var intersect = positionOf(boundingRect(apples[i]), boundingRect(hero));
-        // if intersect from left or right side - catch apple and raise Score
-        if(intersect == '#WEST#' || intersect == '#EAST#')
+        var intersect = positionOf(boundingRect(apple), boundingRect(hero));
+
+        switch (intersect)
         {
-            apples[i].isDrawing = false;
-            TotalScore+=10;
-        }
-        // if intersect from left or right side - catch apple and decrease HP
-        if(intersect == '#NORTH#')
-        {
-            apples[i].isDrawing = false;
-            hero.HP -= 7;
-        }
-        // replace catched apples with new ones
-        if(apples[i].isDrawing == false)
-        {
-            apples[i].RebornTimeout -= 50;
-            if(apples[i].RebornTimeout == 0)
+            case '#WEST#':
+            case '#EAST#':
+            case '#SOUTH#':
+                {
+                    apple.isDrawing = false;
+                    TotalScore+=10;
+                    break;
+                }
+            case '#NORTH#':
             {
-                apples[i] = newApple();
+                if(apple.isFalling && apple.isDrawing)
+                {
+                    apple.isDrawing = false;
+                    hero.HP -= 7;
+                }
+                break;
+            }
+            default :
+                break;
+        }
+
+        if(apple.isDrawing == false)
+        {
+            apple.RebornTimeout -= 50;
+            if(apple.RebornTimeout == 0)
+            {
+                apples[index] = newApple();
             }
         }
-        //ctx.fillText(intersect,apples[i].x,apples[i].y);
-    }
+    });
 }
 
 // clear canvas function
@@ -134,50 +142,50 @@ function clear() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
 
+function restart()
+{
+    Initialization();
+}
+
 function gameInfo(ctx)
 {
-    var bar = $('health');
-    var score = $('score');
-    score.textContent= "Score:" + TotalScore;
+    var bar = jQuery('#health');
+    var score = jQuery('#score');
+    score.text("Score:" + TotalScore);
 
-    bar.removeClassName('bar-danger');
-    bar.removeClassName('bar-warning');
-    bar.removeClassName('bar-success');
+    bar.removeClass('bar-danger');
+    bar.removeClass('bar-warning');
+    bar.removeClass('bar-success');
 
     if(hero.HP < 0) {
-        if (confirm("You lose. want to try again?")) {
-            hero.HP = 100;
-            TotalScore = 0;
-        }
+        gameOver = true;
+        if(gameOver) {
+            jQuery('#gameOver').modal();
+            $('scoreModal').textContent = TotalScore;
+        };
     }
     else if(hero.HP < 30)
     {
-        bar.addClassName('bar bar-danger');
-        bar.style.width = hero.HP + "%";
+        bar.addClass('bar bar-danger');
+        bar.width(hero.HP + "%");
     }
     else if(hero.HP < 60)
     {
-        bar.addClassName('bar bar-warning');
-        bar.style.width = hero.HP + "%";
+        bar.addClass('bar bar-warning');
+        bar.width(hero.HP + "%");
     }
     else
     {
-        bar.addClassName('bar bar-success');
-        bar.style.width = hero.HP + "%";
+        bar.addClass('bar bar-success');
+        bar.width(hero.HP + "%");
     }
-}
-
-function DrawControls(ctx)
-{
-    ctx.drawImage(leftControlImage, 0, 0, 100, 154, 20, height/2 - 154/2, 100, 154);
-    ctx.drawImage(rightControlImage, 0, 0, 100, 154, width - 120, height/2 - 154/2, 100, 154);
 }
 
 //-----------------------------
 
 function drawScene(){
+    if(gameOver) return;
     clear();
-    DrawControls(ctx);
     drawAllApples(ctx);
     appleRipening();
     appleDisappearance();
@@ -190,44 +198,24 @@ function drawScene(){
 
 }
 
-// initialization
-
-$(function(){
-    canvas = document.getElementById('scene');
-    ctx = canvas.getContext('2d');
-
-    // lock scroll position, but retain settings for later
-    var scrollPosition = [
-        this.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
-        this.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop
-    ];
-    var html = jQuery('html'); // it would make more sense to apply this to body, but IE7 won't have that
-    html.data('scroll-position', scrollPosition);
-    html.data('previous-overflow', html.css('overflow'));
-    html.css('overflow', 'hidden');
-    window.scrollTo(scrollPosition[0], scrollPosition[1]);
-
-    canvas.onselectstart = function () { return false; }
-
-    width = canvas.width;
-    height = canvas.height;
-
-    leftControlImage = new Image();
-    leftControlImage.src = 'img/left.png';
-
-    rightControlImage = new Image();
-    rightControlImage.src = 'img/right.png';
-
-
-    hero = new Hero(300,300);
+function Initialization()
+{
+    hero = new Hero(500,500);
 
     direction = 'right';
     TotalScore = 0;
+
+    apples = [];
 
     for (var i=0; i< maxAppleCounts; i++){
         apples.push(newApple());
     }
 
+    gameOver=false;
+}
+
+function ApplyControls()
+{
     canvas.onmousedown = function(e){
         var x = e.offsetX;
         if(x > width/2) direction = 'right';
@@ -280,6 +268,43 @@ $(function(){
         event.preventDefault();
         hero.IsRunning = false;
     }, false);
+}
+
+
+// initialization
+
+$(function(){
+    canvas = document.getElementById('scene');
+    ctx = canvas.getContext('2d');
+
+    // lock scroll position, but retain settings for later
+    var scrollPosition = [
+        this.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+        this.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop
+    ];
+    var html = jQuery('#html'); // it would make more sense to apply this to body, but IE7 won't have that
+    html.data('scroll-position', scrollPosition);
+    html.data('previous-overflow', html.css('overflow'));
+    html.css('overflow', 'hidden');
+    window.scrollTo(scrollPosition[0], scrollPosition[1]);
+
+    canvas.onselectstart = function () { return false; }
+
+    jQuery('#leftControl').animate({
+        opacity: 0,
+        width: '500px'
+            },5000, function(){});
+
+    jQuery('#rightControl').animate({
+        opacity: 0,
+        width: '500px'
+    },5000, function(){});
+
+    width = canvas.width;
+    height = canvas.height;
+
+    Initialization();
+    ApplyControls();
 
     setInterval(drawScene, 40);
 });

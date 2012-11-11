@@ -9,86 +9,18 @@
 
         <script type="text/javascript" src="js/vendor/jquery-1.8.0.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
+
         <script type="text/javascript" src="js/common.js"></script>
         <script type="text/javascript" src="js/gameObjects.js"></script>
         <script type="text/javascript" src="js/hero.js"></script>
         <script type="text/javascript" src="js/scene.js"></script>
         <script type="text/javascript" src="js/jasmine/jasmine.js"></script>
         <script type="text/javascript" src="js/jasmine/jasmine-html.js"></script>
-        <!--<script type="text/javascript" src="js/jasmine/jasmine-1.1.0.js"></script>
-        <script type="text/javascript" src="js/jasmine/JasmineAdapter-1.1.2.js"></script>-->
+        <script type="text/javascript" src="js/linq.js"></script>
+        <!--<script src="lib/prototype-1.6.0.2.js"></script>-->
+    </head>
 
-        
-    <script src="lib/prototype-1.6.0.2.js"></script>
-
-	<!-- box2djs
-    <script src='js/box2d/common/b2Settings.js'></script>
-    <script src='js/box2d/common/math/b2Vec2.js'></script>
-    <script src='js/box2d/common/math/b2Mat22.js'></script>
-    <script src='js/box2d/common/math/b2Math.js'></script>
-    <script src='js/box2d/collision/b2AABB.js'></script>
-    <script src='js/box2d/collision/b2Bound.js'></script>
-    <script src='js/box2d/collision/b2BoundValues.js'></script>
-    <script src='js/box2d/collision/b2Pair.js'></script>
-    <script src='js/box2d/collision/b2PairCallback.js'></script>
-    <script src='js/box2d/collision/b2BufferedPair.js'></script>
-    <script src='js/box2d/collision/b2PairManager.js'></script>
-    <script src='js/box2d/collision/b2BroadPhase.js'></script>
-    <script src='js/box2d/collision/b2Collision.js'></script>
-    <script src='js/box2d/collision/Features.js'></script>
-    <script src='js/box2d/collision/b2ContactID.js'></script>
-    <script src='js/box2d/collision/b2ContactPoint.js'></script>
-    <script src='js/box2d/collision/b2Distance.js'></script>
-    <script src='js/box2d/collision/b2Manifold.js'></script>
-    <script src='js/box2d/collision/b2OBB.js'></script>
-    <script src='js/box2d/collision/b2Proxy.js'></script>
-    <script src='js/box2d/collision/ClipVertex.js'></script>
-    <script src='js/box2d/collision/shapes/b2Shape.js'></script>
-    <script src='js/box2d/collision/shapes/b2ShapeDef.js'></script>
-    <script src='js/box2d/collision/shapes/b2BoxDef.js'></script>
-    <script src='js/box2d/collision/shapes/b2CircleDef.js'></script>
-    <script src='js/box2d/collision/shapes/b2CircleShape.js'></script>
-    <script src='js/box2d/collision/shapes/b2MassData.js'></script>
-    <script src='js/box2d/collision/shapes/b2PolyDef.js'></script>
-    <script src='js/box2d/collision/shapes/b2PolyShape.js'></script>
-    <script src='js/box2d/dynamics/b2Body.js'></script>
-    <script src='js/box2d/dynamics/b2BodyDef.js'></script>
-    <script src='js/box2d/dynamics/b2CollisionFilter.js'></script>
-    <script src='js/box2d/dynamics/b2Island.js'></script>
-    <script src='js/box2d/dynamics/b2TimeStep.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2ContactNode.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2Contact.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2ContactConstraint.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2ContactConstraintPoint.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2ContactRegister.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2ContactSolver.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2CircleContact.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2Conservative.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2NullContact.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2PolyAndCircleContact.js'></script>
-    <script src='js/box2d/dynamics/contacts/b2PolyContact.js'></script>
-    <script src='js/box2d/dynamics/b2ContactManager.js'></script>
-    <script src='js/box2d/dynamics/b2World.js'></script>
-    <script src='js/box2d/dynamics/b2WorldListener.js'></script>
-    <script src='js/box2d/dynamics/joints/b2JointNode.js'></script>
-    <script src='js/box2d/dynamics/joints/b2Joint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2JointDef.js'></script>
-    <script src='js/box2d/dynamics/joints/b2DistanceJoint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2DistanceJointDef.js'></script>
-    <script src='js/box2d/dynamics/joints/b2Jacobian.js'></script>
-    <script src='js/box2d/dynamics/joints/b2GearJoint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2GearJointDef.js'></script>
-    <script src='js/box2d/dynamics/joints/b2MouseJoint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2MouseJointDef.js'></script>
-    <script src='js/box2d/dynamics/joints/b2PrismaticJoint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2PrismaticJointDef.js'></script>
-    <script src='js/box2d/dynamics/joints/b2PulleyJoint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2PulleyJointDef.js'></script>
-    <script src='js/box2d/dynamics/joints/b2RevoluteJoint.js'></script>
-    <script src='js/box2d/dynamics/joints/b2RevoluteJointDef.js'></script>
-    -->
-  </head>
-    <body>
+<body>
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="">
@@ -112,21 +44,39 @@
             </div>
         </div>
     </div>
-        <div class="container">
-            <fieldset>
+
+    <!-- Modal -->
+    <div id="gameOver" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Game Over</h3>
+        </div>
+        <div class="modal-body">
+            <b>Your score: </b> <div id="scoreModal"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="restart()">Close</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <fieldset>
             <div class="row">
-                <div class="well span7">
+                <canvas class="img-rounded" id="scene" width="800" height="600"></canvas>
+                <div id="gameInfo">
                     <div class="progress progress-striped active span4">
                         <div id="health" class="bar bar-success" style="width: 100%;"></div>
                     </div>
                     <div class="pull-right">
                         <span id="score" class="badge badge-important">4</span>
                     </div>
+                    <div id="controls">
+                        <div id="leftControl"><img src="img/left.png"></div>
+                        <div id="rightControl"><img src="img/right.png"></div>
+                    </div>
                 </div>
-                <canvas class="img-rounded" id="scene" width="800" height="600"></canvas>
             </div>
-            </fieldset>
-        </div>
-
-	</body>
+        </fieldset>
+    </div>
+</body>
 </html>

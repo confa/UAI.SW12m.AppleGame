@@ -26,7 +26,8 @@ function Apple(x, y){
     this.drawApple = function (ctx)
     {
         if(self.isDrawing) {
-            ctx.drawImage(appleTexture, 0, 0, appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+            ctx.drawImage(appleTexture, 0, 0, appleWidth, appleHeight,
+                self.x, self.y, appleWidth, appleHeight);
         }
     };
 
