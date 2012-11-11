@@ -8,6 +8,8 @@ var direction;
 var TotalScore;
 var gameOver;
 
+var catchedMessages = ["Catched!", "YEAH!", "Pick!", "Good!", "Perfect!", "Excellent!", "RAMPAGE!!!"];
+
 // ---------------------
 
 // function related to objects drawing
@@ -109,8 +111,14 @@ function intersects(ctx){
             case '#EAST#':
             case '#SOUTH#':
                 {
-                    apple.isDrawing = false;
-                    TotalScore+=10;
+                    if(apple.isDrawing)
+                    {
+                        apple.isDrawing = false;
+                        TotalScore+=10;
+                        if(TotalScore % 100 == 0)
+                        var message = catchedMessages[Random(catchedMessages.length - 1)]
+                        AnimateMessageToUser(message, apple.x, apple.y)
+                    }
                     break;
                 }
             case '#NORTH#':
@@ -119,6 +127,7 @@ function intersects(ctx){
                 {
                     apple.isDrawing = false;
                     hero.HP -= 7;
+                    AnimateMessageToUser("OOUPS!", apple.x, apple.y)
                 }
                 break;
             }
@@ -161,7 +170,7 @@ function gameInfo(ctx)
         gameOver = true;
         if(gameOver) {
             jQuery('#gameOver').modal();
-            $('scoreModal').textContent = TotalScore;
+            jQuery('#scoreModal').text(TotalScore);
         };
     }
     else if(hero.HP < 30)
@@ -270,6 +279,65 @@ function ApplyControls()
     }, false);
 }
 
+function AnimateMessageToUser(text, x, y)
+{
+    var randomId = Random(1000);
+
+    var message = jQuery(document.createElement('span'));
+    message.text(text);
+    message.attr('id', randomId);
+    message.addClass('message');
+
+
+    message.css({
+        left: x,
+        top: y
+    });
+
+    var infoContainer = jQuery('#info');
+    infoContainer.append(message);
+
+    var createdMessage = jQuery('#' + randomId)
+
+    var randomTop = Random(400);
+
+    createdMessage.animate({
+        opacity: 1,
+        top: randomTop + 30
+    }, 1000, function(){
+        createdMessage.animate({
+            opacity: 0
+        }, 1000, function(){
+            createdMessage.remove();
+        })
+    })
+}
+
+function AnimateControls()
+{
+
+    var leftControl = jQuery('#leftControl');
+    var rightControl = jQuery('#rightControl');
+
+    leftControl.animate({
+        opacity: 1
+    },4000, function(){
+        leftControl.animate({
+            opacity: 0
+        },4000), function(){
+            leftControl.remove();
+        }});
+
+    rightControl.animate({
+        opacity: 1
+    },4000, function(){
+        rightControl.animate({
+            opacity: 0
+        },4000, function(){
+            rightControl.remove();
+        })});
+
+}
 
 // initialization
 
@@ -290,21 +358,13 @@ $(function(){
 
     canvas.onselectstart = function () { return false; }
 
-    jQuery('#leftControl').animate({
-        opacity: 0,
-        width: '500px'
-            },5000, function(){});
-
-    jQuery('#rightControl').animate({
-        opacity: 0,
-        width: '500px'
-    },5000, function(){});
-
     width = canvas.width;
     height = canvas.height;
 
     Initialization();
     ApplyControls();
+    AnimateControls();
+    AnimateMessageToUser("LET'S START!!", 20);
 
     setInterval(drawScene, 40);
 });

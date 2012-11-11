@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>HTML 5 Game. SSW-12m</title>
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/jasmine.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="js/vendor/jquery-1.8.0.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript" src="js/gameObjects.js"></script>
+        <script type="text/javascript" src="js/hero.js"></script>
+        <script type="text/javascript" src="js/scene.js"></script>
+        <script type="text/javascript" src="js/jasmine/jasmine.js"></script>
+        <script type="text/javascript" src="js/jasmine/jasmine-html.js"></script>
+        <script type="text/javascript" src="js/linq.js"></script>
+        <!--<script src="lib/prototype-1.6.0.2.js"></script>-->
+    </head>
+
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="">
+                <a class="brand" href="#">Apple Game</a>
+                <ul class="nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="#">Play NOW!</a></li>
+                    <li><a href="awards.html">Awards</a></li>
+                    <li><a href="https://github.com/confa/UAI.SW12m.AppleGame">View on GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="gameOver" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Game Over</h3>
+        </div>
+        <div class="modal-body">
+            <b>Your score: </b> <div id="scoreModal"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="restart()">Close</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <fieldset>
+            <div class="row">
+                <canvas class="img-rounded" id="scene" width="800" height="600"></canvas>
+                <div id="gameInfo">
+                    <div class="progress progress-striped active span4">
+                        <div id="health" class="bar bar-success" style="width: 100%;"></div>
+                    </div>
+                    <div class="pull-right">
+                        <span id="score" class="badge badge-important">4</span>
+                    </div>
+                    <div id="info">
+
+                    </div>
+                    <div id="controls">
+                        <img id="leftControl" src="img/left.png">
+                        <img id="rightControl" src="img/right.png">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>

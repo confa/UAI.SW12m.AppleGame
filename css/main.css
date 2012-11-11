@@ -5,6 +5,13 @@
     padding:0;
 }
 
+@font-face
+{
+    font-family: Sansation;
+    src: url('Sansation_Light.ttf'),
+    url('Sansation_Light.eot'); /* IE9+ */
+}
+
 body {
     background-color:#fff;
     background-image: -webkit-radial-gradient(600px 300px, circle, #ffffff, #bababa 80%);
@@ -88,12 +95,27 @@ h3 {
 {
     position: relative;
     left:10px;
-    top: 150px;
+    top: 300px;
+    opacity: 0;
 }
 
 #rightControl {
     position: relative;
-    left: 690px;
+    top: 300px;
+    left: 590px;
+    opacity: 0;
+}
+
+#info{
+    text-shadow: 5px 5px 5px #f7fff6;
+    text-align: center;
+}
+
+.message{
+    position: absolute;
+    font-family:Sansation;
+    font-size: 40pt;
+    opacity: 0;
 }
 
 /* tutorial styles */
