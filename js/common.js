@@ -1,22 +1,26 @@
-// common functions
+//##############################################################
+// Contains common function which are used by whole application.
+//##############################################################
 
-// return color string from 3 channels
+// Return color string from 3 channels.
 function Color(r, g, b)
 {
     return ('rgba(' + r + ',' + g + ',' + b +', 1.0)').toString();
 }
 
-// returns random value from 0 to max
+// Returns random value from 0 to max.
 function Random(max)
 {
     return Math.floor((Math.random()*max)+1);
 }
 
+// Returns distance between two points.
 function Distance(firstX, firstY, secondX, secondY)
 {
     return Math.sqrt(Math.pow(secondX-firstX,2) + Math.pow(secondY-firstY,2));
 }
 
+// Function for object opacity changing.
 function changeOpacity( imageobject, opacity ) {
 
     var object = imageobject.style;
@@ -26,8 +30,8 @@ function changeOpacity( imageobject, opacity ) {
     object.filter = "alpha(opacity=" + opacity + ")";
 }
 
-// intersect function
-// two object must has properties x, y, Width, Height
+// Function which fill intersects.
+// Remark: two object must has properties x, y, Width, Height
 function positionOf(point, relativeTo) {
     var firstCenterX = point.x + point.Width/2;
     var firstCenterY = point.y + point.Height/2;
@@ -55,4 +59,64 @@ function positionOf(point, relativeTo) {
     }
     return "#NO INTERSECTS#";
 }
-// ---------------------
+
+// Return bounding rect
+// Remark: two object must has properties x, y, Width, Height
+function boundingRect(object)
+{
+    var tempObject = new Object();
+    tempObject.Height = 0.5 * object.Height;
+    tempObject.Width = 0.3 * object.Width;
+    tempObject.x = object.x;
+    tempObject.y = object.y;
+
+    return tempObject;
+}
+
+// Clear canvas function.
+function clear() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
+// Function for game restarting.
+function restart()
+{
+    Initialization();
+}
+
+// Function which create and animate message to user.
+// x, y - start coordinates.
+// text - message text.
+function AnimateMessageToUser(text, x, y)
+{
+    var randomId = Random(1000);
+
+    var message = jQuery(document.createElement('span'));
+    message.text(text);
+    message.attr('id', randomId);
+    message.addClass('message');
+
+
+    message.css({
+        left: x,
+        top: y
+    });
+
+    var infoContainer = jQuery('#info');
+    infoContainer.append(message);
+
+    var createdMessage = jQuery('#' + randomId)
+
+    var randomTop = Random(400);
+
+    createdMessage.animate({
+        opacity: 1,
+        top: randomTop + 30
+    }, 1000, function(){
+        createdMessage.animate({
+            opacity: 0
+        }, 1000, function(){
+            createdMessage.remove();
+        })
+    })
+}

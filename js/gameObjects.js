@@ -1,9 +1,3 @@
-var appleWidth = 50;
-var appleHeight = 50;
-var rebornTimeout = 1000;
-var appleTexture = new Image();
-appleTexture.src = 'img/apple.png';
-
 // Our Apple (or Acorn)
 function Apple(x, y){
     this.x = x;
@@ -17,7 +11,6 @@ function Apple(x, y){
     this.Height = appleHeight;
     this.isFalling = false;
     this.isDrawing = true;
-    this.RebornTimeout = rebornTimeout;
     this.speed = 5+Random(7);
 
     var self = this;
@@ -41,4 +34,102 @@ function Apple(x, y){
         this.ySpeed += this.gravity;
         this.y += this.ySpeed;
     };
+}
+
+// function related to objects drawing
+
+// Drawing all apples
+function drawAllApples(ctx)
+{
+    Enumerable.From(apples).ForEach(function(value)
+    {
+        value.drawApple(ctx);
+    });
+}
+
+function AddNewApple()
+{
+    var disabledApple = -1;
+
+    for(var i=0; i<apples.count; i++)
+    {
+        if(!apples[i].isDrawing)
+        {
+            disabledApple = i;
+            break;
+        }
+    }
+
+    if(disabledApple == -1)
+    {
+        apples.push(newApple());
+    }
+    else
+    {
+        apples[disabledApple] = newApple();
+    }
+}
+
+// ------------------------
+
+// functions related to objects state changing
+
+// If apples falling flag is true
+// apple is falling
+function appleFalling()
+{
+    for (var i=0; i< apples.length; i++)
+    {
+        var tempY = apples[i].y + apples[i].ySpeed;
+        if(apples[i].isFalling && tempY <= height - apples[i].Height) {
+            apples[i].y += apples[i].ySpeed;
+            apples[i].ySpeed += apples[i].gravity;
+        }
+        else
+        {
+            if(apples[i].isFalling)
+            {
+                apples[i].y = height - apples[i].Height;
+            }
+            apples[i].isFalling = false;
+        }
+    }
+}
+// If apple lying per 3 seconds
+// it will disappeared
+function appleDisappearance()
+{
+    for (var i=0; i< apples.length; i++)
+    {
+        if(!apples[i].isFalling && apples[i].y + apples[i].Height >= height && apples[i].r >=250) {
+            apples[i].isDrawing = false;
+        }
+    }
+}
+
+// Apple ripening time per time
+// If apple is riped - start it falling
+function appleRipening(){
+
+    for (var i=0; i< apples.length; i++)
+    {
+        if(!apples[i].isFalling){
+            var colorLambda = 1+Random(2);
+            var r = apples[i].r += colorLambda;
+            var g = apples[i].g -= colorLambda;
+
+            if(g <= 0 && r >=250){
+                apples[i].isFalling = true;
+            }
+        }
+    }
+}
+
+// Added new apple on tree
+function newApple(){
+    var x = (Math.random()*width);
+    var y = Math.random()*height/2;
+    var apple = new Apple(x, y);
+    apple.setGravity(gravity);
+    return apple;
 }

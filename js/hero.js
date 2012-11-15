@@ -1,12 +1,6 @@
-// constants
-var frameWidth = 34;
-var heroWidth = 60;
-var heroHeight = 75;
-var maxSpeedY = 15;
-var maxSpeedX = 15;
-var gravity = 9.8;
-var frameCount = 9;
-var fallingLambda = 0.5;
+//########################################
+// Contains hero class and hero functions.
+//########################################
 
 // Our main hero
 function Hero(x, y){
@@ -15,6 +9,7 @@ function Hero(x, y){
     // coordinates
     this.x = x;
     this.y = y;
+
     this.HP = 100;
 
     this.Width = heroWidth;
@@ -57,8 +52,10 @@ function Hero(x, y){
                 ctx.drawImage (self.runLeftTexture, frameWidth * self.currentFrame, 0,
                     34, 42, self.x, self.y, heroWidth, heroHeight);
             else
+            {
                 ctx.drawImage (self.runRightTexture, frameWidth * self.currentFrame, 0,
                     34, 42, self.x, self.y, heroWidth, heroHeight);
+            }
         }
     };
 

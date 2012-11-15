@@ -1,105 +1,4 @@
-var canvas, ctx;
-var hero;
-var apples = [];
-var maxAppleCounts = 30;
-var width;
-var height;
-var direction;
-var TotalScore;
-var gameOver;
-
-var catchedMessages = ["Catched!", "YEAH!", "Pick!", "Good!", "Perfect!", "Excellent!", "RAMPAGE!!!"];
-
-// ---------------------
-
-// function related to objects drawing
-
-// Drawing all apples
-function drawAllApples(ctx)
-{
-    Enumerable.From(apples).ForEach(function(value)
-    {
-        value.drawApple(ctx);
-    });
-}
-
-// ------------------------
-
-// functions related to objects state changing
-
-// If apples falling flag is true
-// apple is falling
-function appleFalling()
-{
-    for (var i=0; i< apples.length; i++)
-    {
-        var tempY = apples[i].y + apples[i].ySpeed;
-        if(apples[i].isFalling && tempY <= height - apples[i].Height) {
-            apples[i].y += apples[i].ySpeed;
-            apples[i].ySpeed += apples[i].gravity;
-        }
-        else
-        {
-            if(apples[i].isFalling)
-            {
-                apples[i].y = height - apples[i].Height;
-            }
-            apples[i].isFalling = false;
-        }
-    }
-}
-// If apple lying per 3 seconds
-// it will disappeared
-function appleDisappearance()
-{
-    for (var i=0; i< apples.length; i++)
-    {
-        if(!apples[i].isFalling && apples[i].y + apples[i].Height >= height && apples[i].r >=250) {
-            apples[i].isDrawing = false;
-        }
-    }
-}
-
-// Apple ripening time per time
-// If apple is riped - start it falling
-function appleRipening(){
-
-    for (var i=0; i< apples.length; i++)
-    {
-        if(!apples[i].isFalling){
-            var colorLambda = 1+Random(2);
-            var r = apples[i].r += colorLambda;
-            var g = apples[i].g -= colorLambda;
-
-            if(g <= 0 && r >=250){
-                apples[i].isFalling = true;
-            }
-        }
-    }
-}
-
-// Added new apple on tree
-function newApple(){
-    var x = (Math.random()*width);
-    var y = Math.random()*height/2;
-    var apple = new Apple(x, y);
-    apple.setGravity(gravity);
-    return apple;
-}
-
-function boundingRect(object)
-{
-    var tempObject = new Object();
-    tempObject.Height = 0.5 * object.Height;
-    tempObject.Width = 0.3 * object.Width;
-    tempObject.x = object.x;
-    tempObject.y = object.y;
-
-    return tempObject;
-}
-
-function intersects(ctx){
-
+function intersects() {
     Enumerable.From(apples).ForEach(function(apple, index)
     {
         // define intersect
@@ -116,8 +15,20 @@ function intersects(ctx){
                         apple.isDrawing = false;
                         TotalScore+=10;
                         if(TotalScore % 100 == 0)
-                        var message = catchedMessages[Random(catchedMessages.length - 1)]
-                        AnimateMessageToUser(message, apple.x, apple.y)
+                        {
+                            var message = catchedMessages[Random(catchedMessages.length - 1)]
+                            AnimateMessageToUser(message, apple.x, apple.y)
+                            gameLevel > 30
+                                ? gameLevel -= 30
+                                : gameLevel = 30;
+
+                            hero.HP < 95
+                                ? hero.HP +=5
+                                : hero.HP = 100;
+
+                            clearInterval(newAppleInterval);
+                            newAppleInterval = setInterval(AddNewApple, gameLevel);
+                        }
                     }
                     break;
                 }
@@ -134,29 +45,10 @@ function intersects(ctx){
             default :
                 break;
         }
-
-        if(apple.isDrawing == false)
-        {
-            apple.RebornTimeout -= 50;
-            if(apple.RebornTimeout == 0)
-            {
-                apples[index] = newApple();
-            }
-        }
     });
 }
 
-// clear canvas function
-function clear() {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-}
-
-function restart()
-{
-    Initialization();
-}
-
-function gameInfo(ctx)
+function UpdateGameInfo(ctx)
 {
     var bar = jQuery('#health');
     var score = jQuery('#score');
@@ -202,9 +94,8 @@ function drawScene(){
     hero.DrawHero(ctx);
     hero.ApplyGravity();
     hero.Move(direction);
-    intersects(ctx);
-    gameInfo(ctx);
-
+    intersects();
+    UpdateGameInfo(ctx);
 }
 
 function Initialization()
@@ -213,130 +104,15 @@ function Initialization()
 
     direction = 'right';
     TotalScore = 0;
+    gameLevel = 600;
+
+
+    clearInterval(newAppleInterval);
+    newAppleInterval = setInterval(AddNewApple, gameLevel);
 
     apples = [];
 
-    for (var i=0; i< maxAppleCounts; i++){
-        apples.push(newApple());
-    }
-
     gameOver=false;
-}
-
-function ApplyControls()
-{
-    canvas.onmousedown = function(e){
-        var x = e.offsetX;
-        if(x > width/2) direction = 'right';
-        else direction = 'left';
-        hero.IsRunning = true;
-    };
-
-    canvas.onmousemove = function(e){
-        var x = e.offsetX;
-        if(x > width/2) direction = 'right';
-        else direction = 'left';
-    };
-
-    canvas.onmouseup = function(e){
-        hero.IsRunning = false;
-    };
-
-    canvas.ondblclick = function (e){
-        hero.Jump();
-    };
-
-    canvas.addEventListener('touchmove', function(event) {
-        event.preventDefault();
-        var touch = event.touches[0];
-
-        if (touch.length > 1) {
-            hero.Jump();
-        }
-
-        var x = touch.pageX;
-        if(x > width/2) direction = 'right';
-        else direction = 'left';
-    }, false);
-
-    canvas.addEventListener('touchstart', function(event) {
-        event.preventDefault();
-        var touch = event.touches[0];
-
-        if (touch.length > 1) {
-            hero.Jump();
-        }
-
-        var x = touch.pageX;
-        if(x > width/2) direction = 'right';
-        else direction = 'left';
-        hero.IsRunning = true;
-    }, false);
-
-    canvas.addEventListener('touchend', function(event) {
-        event.preventDefault();
-        hero.IsRunning = false;
-    }, false);
-}
-
-function AnimateMessageToUser(text, x, y)
-{
-    var randomId = Random(1000);
-
-    var message = jQuery(document.createElement('span'));
-    message.text(text);
-    message.attr('id', randomId);
-    message.addClass('message');
-
-
-    message.css({
-        left: x,
-        top: y
-    });
-
-    var infoContainer = jQuery('#info');
-    infoContainer.append(message);
-
-    var createdMessage = jQuery('#' + randomId)
-
-    var randomTop = Random(400);
-
-    createdMessage.animate({
-        opacity: 1,
-        top: randomTop + 30
-    }, 1000, function(){
-        createdMessage.animate({
-            opacity: 0
-        }, 1000, function(){
-            createdMessage.remove();
-        })
-    })
-}
-
-function AnimateControls()
-{
-
-    var leftControl = jQuery('#leftControl');
-    var rightControl = jQuery('#rightControl');
-
-    leftControl.animate({
-        opacity: 1
-    },4000, function(){
-        leftControl.animate({
-            opacity: 0
-        },4000, function(){
-            leftControl.remove();
-        })});
-
-    rightControl.animate({
-        opacity: 1
-    },4000, function(){
-        rightControl.animate({
-            opacity: 0
-        },4000, function(){
-            rightControl.remove();
-        })});
-
 }
 
 // initialization
