@@ -195,6 +195,7 @@ function Hero(x, y){
         {
             self.invurableTimeout = 10000;
             self.IsConfused = false;
+            self.confuseTimeout = 0;
             self.umbrella = false;
             jQuery('#invulnerability').attr('disabled','disabled');
         }

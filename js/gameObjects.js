@@ -151,11 +151,11 @@ function newApple(){
 
     var appleType = Math.random();
 
-    if(appleType < 0.7)
+    if(appleType < 0.85)
         apple.Type = ApplesType.NORMAL;
-    else if (appleType < 0.8)
-        apple.Type = ApplesType.CONFUSED
     else if (appleType < 0.9)
+        apple.Type = ApplesType.CONFUSED
+    else if (appleType < 0.95)
         apple.Type = ApplesType.WORMY
     else
         apple.Type = ApplesType.BONUS;

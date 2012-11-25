@@ -166,6 +166,12 @@ function Initialization()
 {
     hero = new Hero(500,500);
 
+    jQuery('#invulnerability').removeAttr('disabled');
+    jQuery('#life').removeAttr('disabled');
+    jQuery('#stun').removeAttr('disabled');
+    jQuery('#jolt').removeAttr('disabled');
+    jQuery('#slow').removeAttr('disabled');
+
     direction = 'right';
     TotalScore = 0;
     gameLevel = 600;
