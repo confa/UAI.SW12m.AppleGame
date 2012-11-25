@@ -20,6 +20,23 @@ function Distance(firstX, firstY, secondX, secondY)
     return Math.sqrt(Math.pow(secondX-firstX,2) + Math.pow(secondY-firstY,2));
 }
 
+function Pause()
+{
+    if(pause == true)
+    {
+        pause = false;
+        newAppleInterval = setInterval(AddNewApple, gameLevel);
+        AnimateMessageToUser("Let's continue!", 300, height - 50);
+    }
+    else
+    {
+        pause = true;
+        clearInterval(newAppleInterval);
+        AnimateMessageToUser("PAUSE", 300, height - 50);
+        jQuery('#score').text("Pause");
+    }
+}
+
 // Function for object opacity changing.
 function changeOpacity( imageobject, opacity ) {
 

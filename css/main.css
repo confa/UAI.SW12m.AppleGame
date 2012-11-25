@@ -93,22 +93,41 @@ h3 {
 
 #leftControl
 {
-    position: relative;
+    position: absolute;
     left:10px;
     top: 300px;
     opacity: 0;
 }
 
 #rightControl {
-    position: relative;
+    position: absolute;
     top: 300px;
-    left: 590px;
+    left: 690px;
     opacity: 0;
 }
 
 #info{
     text-shadow: 5px 5px 5px #f7fff6;
     text-align: center;
+}
+
+#scorePanel{
+    position: absolute;
+    left: 600px;
+    color:#ffffff;
+    font-family:Sansation;
+    text-shadow: 8px 8px 8px #f7fff6;
+    font-size: 25pt;
+}
+#pause{
+    position: absolute;
+    left: 420px;
+}
+
+#bonuses{
+    position: absolute;
+    left: 650px;
+    top: 300px;
 }
 
 .message{

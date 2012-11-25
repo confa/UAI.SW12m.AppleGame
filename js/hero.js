@@ -19,9 +19,11 @@ function Hero(x, y){
     this.IsRunning = false;
     this.IsJumping = false;
     this.IsConfused = false;
+    this.IsInvulnerable = false;
 
-    // confused timeout
+    // timeouts
     this.confuseTimeout = 0;
+    this.invurableTimeout = 0;
 
     // hero speeds
     this.SpeedY = 0;
@@ -33,13 +35,28 @@ function Hero(x, y){
     // current frame for drawing
     this.currentFrame = 0;
 
-    // texture for run left /
+    // bonuses
+    this.umbrella = true;
+    this.slowing = true;
+    this.jolt = true;
+    this.life = true;
+    this.stun = true;
+
+    // texture for run left
     self.runLeftTexture = new Image();
     self.runLeftTexture.src = 'img/RunLeft.png';
 
     // texture for run right
     self.runRightTexture = new Image();
     self.runRightTexture.src = 'img/RunRight.png';
+
+    // texture for run left (God mode)
+    self.invulnerableRunLeftTexture = new Image();
+    self.invulnerableRunLeftTexture.src = 'img/InvulnerableRunLeft.png';
+
+    // texture for run right (invurable)
+    self.invulnerableRunRightTexture = new Image();
+    self.invulnerableRunRightTexture.src = 'img/InvulnerableRunRight.png';
 
     // texture for idle
     self.idleTexture = new Image();
@@ -59,13 +76,27 @@ function Hero(x, y){
             if( !self.IsRunning )
                 ctx.drawImage(self.idleTexture, 0, 0, 34, 42, self.x, self.y, heroWidth, heroHeight);
             else{
-                if(self.direction == 'left')
-                    ctx.drawImage (self.runLeftTexture, frameWidth * self.currentFrame, 0,
-                        34, 42, self.x, self.y, heroWidth, heroHeight);
+                if(!self.IsInvulnerable)
+                {
+                    if(self.direction == 'left')
+                        ctx.drawImage (self.runLeftTexture, frameWidth * self.currentFrame, 0,
+                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                    else
+                    {
+                        ctx.drawImage (self.runRightTexture, frameWidth * self.currentFrame, 0,
+                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                    }
+                }
                 else
                 {
-                    ctx.drawImage (self.runRightTexture, frameWidth * self.currentFrame, 0,
-                        34, 42, self.x, self.y, heroWidth, heroHeight);
+                    if(self.direction == 'left')
+                        ctx.drawImage (self.invulnerableRunLeftTexture, frameWidth * self.currentFrame, 0,
+                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                    else
+                    {
+                        ctx.drawImage (self.invulnerableRunRightTexture, frameWidth * self.currentFrame, 0,
+                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                    }
                 }
             }
         }
@@ -106,6 +137,21 @@ function Hero(x, y){
 
         // ------------------------
 
+        // ------- invurable ------
+
+        if(self.invurableTimeout > 0)
+        {
+            self.IsInvulnerable = true;
+            self.invurableTimeout -= 40;
+        }
+        else
+        {
+            self.IsInvulnerable = false;
+            self.invurableTimeout = 0;
+        }
+
+        // ------------------------
+
     };
 
     // hero confuse
@@ -141,6 +187,59 @@ function Hero(x, y){
                     self.x += maxSpeedX;
                 }
             }
+        }
+    }
+
+    this.Invulnerable = function(){
+        if(self.umbrella)
+        {
+            self.invurableTimeout = 10000;
+            self.IsConfused = false;
+            self.umbrella = false;
+            jQuery('#invulnerability').attr('disabled','disabled');
+        }
+    }
+
+    this.Slow = function() {
+        if(self.slowing)
+        {
+            gameLevel /= 2;
+            self.slowing = false;
+            jQuery('#slow').attr('disabled','disabled');
+        }
+    }
+
+    this.Jolt = function() {
+        if(self.jolt)
+        {
+            Enumerable.From(apples).ForEach(function(apple)
+            {
+                if(apple.isDrawing)
+                {
+                    apple.isFalling = true;
+                }
+            });
+            self.jolt = false;
+            jQuery('#jolt').attr('disabled','disabled');
+        }
+    }
+
+    this.Life = function() {
+        if(self.life)
+        {
+            self.HP = 100;
+            self.life = false;
+            jQuery('#life').attr('disabled','disabled');
+        }
+    }
+
+    this.Stun = function() {
+        if(self.stun)
+        {
+            self.IsConfused = false;
+            self.confuseTimeout = 0;
+            self.stun = false;
+            jQuery('#stun').attr('disabled','disabled');
         }
     }
 }

@@ -8,6 +8,7 @@ function Apple(x, y){
     this.g = 255;
     this.b = 0;
     this.Width = appleWidth;
+    this.Type = ApplesType.NORMAL;
     this.Height = appleHeight;
     this.isFalling = false;
     this.isDrawing = true;
@@ -19,8 +20,25 @@ function Apple(x, y){
     this.drawApple = function (ctx)
     {
         if(self.isDrawing) {
-            ctx.drawImage(appleTexture, 0, 0, appleWidth, appleHeight,
-                self.x, self.y, appleWidth, appleHeight);
+            switch (self.Type)
+            {
+                case ApplesType.NORMAL:
+                    ctx.drawImage(normalAppleTexture, 0, 0, appleWidth, appleHeight,
+                        self.x, self.y, appleWidth, appleHeight);
+                    break;
+                case ApplesType.WORMY:
+                    ctx.drawImage(wormyAppleTexture, 0, 0, appleWidth, appleHeight,
+                        self.x, self.y, appleWidth, appleHeight);
+                    break;
+                case ApplesType.CONFUSED:
+                    ctx.drawImage(confuseAppleTexture, 0, 0, appleWidth, appleHeight,
+                        self.x, self.y, appleWidth, appleHeight);
+                    break;
+                case ApplesType.BONUS:
+                    ctx.drawImage(bonusAppleTexture, 0, 0, appleWidth, appleHeight,
+                        self.x, self.y, appleWidth, appleHeight);
+                    break;
+            }
         }
     };
 
@@ -127,9 +145,21 @@ function appleRipening(){
 
 // Added new apple on tree
 function newApple(){
-    var x = (Math.random()*width);
-    var y = Math.random()*height/2;
+    var x = Random(width-appleWidth);
+    var y = Random(height/2);
     var apple = new Apple(x, y);
+
+    var appleType = Math.random();
+
+    if(appleType < 0.7)
+        apple.Type = ApplesType.NORMAL;
+    else if (appleType < 0.8)
+        apple.Type = ApplesType.CONFUSED
+    else if (appleType < 0.9)
+        apple.Type = ApplesType.WORMY
+    else
+        apple.Type = ApplesType.BONUS;
+
     apple.setGravity(gravity);
     return apple;
 }

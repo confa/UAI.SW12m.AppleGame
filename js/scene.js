@@ -13,33 +13,95 @@ function intersects() {
                     if(apple.isDrawing)
                     {
                         apple.isDrawing = false;
-                        TotalScore+=10;
-                        if(TotalScore % 100 == 0)
+
+                        switch (apple.Type)
                         {
-                            var message = catchedMessages[Random(catchedMessages.length - 1)]
-                            AnimateMessageToUser(message, apple.x, apple.y)
-                            gameLevel > 30
-                                ? gameLevel -= 30
-                                : gameLevel = 30;
+                            case ApplesType.NORMAL:
+                                TotalScore+=10;
+                                if(TotalScore % 100 == 0)
+                                {
+                                    var message = catchedMessages[Random(catchedMessages.length - 1)]
+                                    AnimateMessageToUser(message, apple.x, apple.y)
+                                    gameLevel > 30
+                                        ? gameLevel -= 30
+                                        : gameLevel = 30;
 
-                            hero.HP < 95
-                                ? hero.HP +=5
-                                : hero.HP = 100;
+                                    hero.HP < 95
+                                        ? hero.HP +=5
+                                        : hero.HP = 100;
 
-                            clearInterval(newAppleInterval);
-                            newAppleInterval = setInterval(AddNewApple, gameLevel);
+                                    clearInterval(newAppleInterval);
+                                    newAppleInterval = setInterval(AddNewApple, gameLevel);
+                                }
+                                break;
+                            case ApplesType.WORMY:
+                                if(hero.IsInvulnerable) break;
+                                hero.HP -= 5;
+                                AnimateMessageToUser("WORMY!", apple.x, apple.y);
+                                break;
+                            case ApplesType.CONFUSED:
+                                if(hero.IsInvulnerable) break;
+                                hero.Confuse(1000);
+                                hero.HP -= 5;
+                                AnimateMessageToUser("Confused!", apple.x, apple.y);
+                                break;
+                            case ApplesType.BONUS:
+                                TotalScore+=10;
+                                var bonus = Math.random();
+
+                                if(bonus < 0.2){
+                                    hero.umbrella = true;
+                                    AnimateMessageToUser("Umbrella!", apple.x, apple.y);
+                                    jQuery('#invulnerability').removeAttr('disabled');
+                                }
+                                else if (bonus < 0.4){
+                                    hero.slowing = true;
+                                    AnimateMessageToUser("Slow!", apple.x, apple.y);
+                                    jQuery('#slow').removeAttr('disabled');
+                                }
+                                else if (bonus < 0.6){
+                                    hero.life = true;
+                                    AnimateMessageToUser("Life!", apple.x, apple.y);
+                                    jQuery('#life').removeAttr('disabled');
+                                }
+                                else if (bonus < 0.8){
+                                    hero.stun = true;
+                                    AnimateMessageToUser("Stun!", apple.x, apple.y);
+                                    jQuery('#stun').removeAttr('disabled');
+                                }
+                                else {
+                                    hero.jolt = true;
+                                    AnimateMessageToUser("Jolt!", apple.x, apple.y);
+                                    jQuery('#jolt').removeAttr('disabled');
+                                }
+
+                                break;
                         }
                     }
+
                     break;
                 }
             case '#NORTH#':
             {
+                if(hero.IsInvulnerable)
+                {
+                    apple.isDrawing = false;
+                    TotalScore+=10;
+                    break;
+                }
                 if(apple.isFalling && apple.isDrawing)
                 {
                     apple.isDrawing = false;
                     hero.HP -= 7;
                     hero.Confuse(4000);
                     AnimateMessageToUser("OOUPS!", apple.x, apple.y)
+
+                    gameLevel > 30
+                        ? gameLevel += 30
+                        : gameLevel = 30;
+
+                    clearInterval(newAppleInterval);
+                    newAppleInterval = setInterval(AddNewApple, gameLevel);
                 }
                 break;
             }
@@ -87,6 +149,7 @@ function UpdateGameInfo(ctx)
 
 function drawScene(){
     if(gameOver) return;
+    if(pause) return;
     clear();
     drawAllApples(ctx);
     appleRipening();
@@ -111,6 +174,7 @@ function Initialization()
     newAppleInterval = setInterval(AddNewApple, gameLevel);
     apples = [];
     gameOver=false;
+    pause = false;
 }
 
 // initialization

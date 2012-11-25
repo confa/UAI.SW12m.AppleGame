@@ -59,11 +59,19 @@
                     <div class="progress progress-striped active span4">
                         <div id="health" class="bar bar-success" style="width: 100%;"></div>
                     </div>
-                    <div class="pull-right">
-                        <span id="score" class="badge badge-important">4</span>
+                    <div id="scorePanel">
+                        <span id="score">0</span>
                     </div>
-                    <div id="info">
-
+                    <div id="info"></div>
+                    <div id="pause">
+                        <div class="btn btn-success span1" onclick="Pause()">Pause</div>
+                    </div>
+                    <div id=bonuses>
+                        <div id = "invulnerability" class="btn btn-success span1" onclick="hero.Invulnerable()">Invulnerability</div>
+                        <div id = "slow" class="btn btn-success span1" onclick="hero.Slow()">Slow</div>
+                        <div id = "jolt" class="btn btn-success span1" onclick="hero.Jolt()">Jolt</div>
+                        <div id = "life" class="btn btn-success span1" onclick="hero.Life()">Life</div>
+                        <div id = "stun" class="btn btn-success span1" onclick="hero.Stun()">Stun</div>
                     </div>
                     <div id="controls">
                         <img id="leftControl" src="img/left.png">
