@@ -38,6 +38,7 @@ function intersects() {
                 {
                     apple.isDrawing = false;
                     hero.HP -= 7;
+                    hero.Confuse(4000);
                     AnimateMessageToUser("OOUPS!", apple.x, apple.y)
                 }
                 break;
@@ -92,7 +93,7 @@ function drawScene(){
     appleDisappearance();
     appleFalling();
     hero.DrawHero(ctx);
-    hero.ApplyGravity();
+    hero.Update();
     hero.Move(direction);
     intersects();
     UpdateGameInfo(ctx);
@@ -106,12 +107,9 @@ function Initialization()
     TotalScore = 0;
     gameLevel = 600;
 
-
     clearInterval(newAppleInterval);
     newAppleInterval = setInterval(AddNewApple, gameLevel);
-
     apples = [];
-
     gameOver=false;
 }
 

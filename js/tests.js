@@ -72,7 +72,7 @@ describe("Hero tests", function(){
             // act
             hero.Jump();
             var previousSpeedY = hero.SpeedY;
-            hero.ApplyGravity();
+            hero.Update();
 
             // assert
             expect(hero.SpeedY).toEqual(previousSpeedY - fallingLambda);
@@ -81,7 +81,7 @@ describe("Hero tests", function(){
         it("Should stop jumping when speed is zero", function(){
             // act
             hero.SpeedY = 0;
-            hero.ApplyGravity();
+            hero.Update();
 
             expect(hero.IsJumping).toBeFalsy();
         });
@@ -166,7 +166,7 @@ describe("Gravity tests", function(){
 
         it("Should return value less then before gravity applying", function(){
             var before = hero.y;
-            hero.ApplyGravity();
+            hero.Update();
 
             expect(before).toBeLessThan(hero.y);
         });
