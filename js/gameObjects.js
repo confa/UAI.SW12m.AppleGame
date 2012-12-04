@@ -44,7 +44,7 @@ function Apple(x, y){
 
     this.setGravity = function (gravity)
     {
-        this.gravity = gravity/6;
+        this.gravity = gravity/10;
     };
 
     this.applyGravity = function()
