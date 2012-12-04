@@ -111,6 +111,12 @@ function intersects() {
     });
 }
 
+function SaveResults()
+{
+    var name = jQuery('#playerName').val();
+    addNewScore(name, TotalScore);
+}
+
 function UpdateGameInfo(ctx)
 {
     var bar = jQuery('#health');

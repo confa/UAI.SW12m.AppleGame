@@ -137,6 +137,20 @@ h3 {
     opacity: 0;
 }
 
+#awardsTable td{
+    width: 300px;
+    color:#000;
+    font-family:Sansation;
+    font-size: 12pt;
+}
+
+#awardsTable thead{
+    width: 300px;
+    color:#000;
+    font-family:Sansation;
+    font-size: 15pt;
+}
+
 /* tutorial styles */
 #scene {
     background-image:url(../img/01.jpg);

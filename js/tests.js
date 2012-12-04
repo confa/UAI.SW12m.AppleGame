@@ -68,6 +68,8 @@ describe("Hero tests", function(){
         it("Should decrease speed on lambda when is jumping", function(){
             // arrange
             hero.SpeedY = 0;
+            hero.Width = 90;
+            hero.y = 20;
 
             // act
             hero.Jump();

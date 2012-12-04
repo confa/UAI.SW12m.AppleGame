@@ -16,6 +16,7 @@
         <script type="text/javascript" src="js/hero.js"></script>
         <script type="text/javascript" src="js/controls.js"></script>
         <script type="text/javascript" src="js/scene.js"></script>
+        <script type="text/javascript" src="js/database.js"></script>
         <script type="text/javascript" src="js/jasmine/jasmine.js"></script>
         <script type="text/javascript" src="js/jasmine/jasmine-html.js"></script>
         <script type="text/javascript" src="js/linq.js"></script>
@@ -44,7 +45,12 @@
             <h3 id="myModalLabel">Game Over</h3>
         </div>
         <div class="modal-body">
-            <b>Your score: </b> <div id="scoreModal"></div>
+            <form class="form-actions">
+                <p>Your score: </p> <div id="scoreModal"></div>
+                <label for="playerName">Your name:</label>
+                <input id="playerName" type="text" class="input-small search-query">
+                <button type="submit" class="btn" onclick="SaveResults()">Save</button>
+            </form>
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="restart()">Close</button>

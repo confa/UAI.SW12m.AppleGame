@@ -14,6 +14,7 @@ var gameOver;
 var gameLevel;
 var pause;
 var newAppleInterval;
+var db;
 
 var catchedMessages = ["Catched!", "YEAH!", "Pick!", "Good!", "Perfect!", "Excellent!", "RAMPAGE!!!"];
 
