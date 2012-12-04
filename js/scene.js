@@ -210,5 +210,5 @@ $(function(){
     AnimateControls();
     AnimateMessageToUser("LET'S START!!", 20);
 
-    setInterval(drawScene, 40);
+    setInterval(drawScene, 20);
 });
