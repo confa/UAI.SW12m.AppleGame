@@ -38,6 +38,17 @@ body {
     margin:50px auto;
 }
 
+.full-circle {
+    background-color: rgba(204, 0, 102, 0);
+    height: 50px;
+    -moz-border-radius:75px;
+    -webkit-border-radius: 75px;
+    box-shadow: inset #0DA300 0 0 6px 1px, #34A300 0 0 24px 6px;
+    width: 50px;
+    text-indent: -999em;
+    margin-bottom: 15px;
+}
+
 footer {
     background-color:#212121;
     bottom:0;
@@ -111,6 +122,54 @@ h3 {
     text-align: center;
 }
 
+#leftBonuses{
+    position: absolute;
+    left: 20px;
+    top: 300px;
+}
+
+#rightBonuses{
+    position: absolute;
+    left: 730px;
+    top: 300px;
+}
+
+#invulnerability{
+    background-image: url(../img/invul-active.png);
+    background-size: 40px 40px;
+    background-position: center;
+}
+
+#pause{
+    background-image: url(../img/pause.png);
+    background-size: 50px 50px;
+    background-position: center;
+}
+
+#slow{
+    background-image: url(../img/slow-active.png);
+    background-size: 40px 40px;
+    background-position: center;
+}
+
+#jolt{
+    background: url(../img/bang-active.png) 0 0 no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+
+#life{
+    background: url(../img/life-active.png) 0 0 no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+
+#stun{
+    background: url(../img/poison-active.png) 0 0 no-repeat;
+    background-size: 40px 40px;
+    background-position: center;
+}
+
 #scorePanel{
     position: absolute;
     left: 600px;
@@ -118,16 +177,6 @@ h3 {
     font-family:Sansation;
     text-shadow: 8px 8px 8px #f7fff6;
     font-size: 25pt;
-}
-#pause{
-    position: absolute;
-    left: 420px;
-}
-
-#bonuses{
-    position: absolute;
-    left: 650px;
-    top: 300px;
 }
 
 .message{

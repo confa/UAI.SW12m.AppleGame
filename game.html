@@ -69,15 +69,15 @@
                         <span id="score">0</span>
                     </div>
                     <div id="info"></div>
-                    <div id="pause">
-                        <div class="btn btn-success span1" onclick="Pause()">Pause</div>
+                    <div id="leftBonuses">
+                        <div id = "pause" class="full-circle" onclick="Pause()">Pause</div>
+                        <div id = "invulnerability" class="full-circle" onclick="hero.Invulnerable()">Invulnerability</div>
+                        <div id = "slow" class="full-circle" onclick="hero.Slow()">Slow</div>
                     </div>
-                    <div id=bonuses>
-                        <div id = "invulnerability" class="btn btn-success span1" onclick="hero.Invulnerable()">Invulnerability</div>
-                        <div id = "slow" class="btn btn-success span1" onclick="hero.Slow()">Slow</div>
-                        <div id = "jolt" class="btn btn-success span1" onclick="hero.Jolt()">Jolt</div>
-                        <div id = "life" class="btn btn-success span1" onclick="hero.Life()">Life</div>
-                        <div id = "stun" class="btn btn-success span1" onclick="hero.Stun()">Stun</div>
+                    <div id="rightBonuses">
+                        <div id = "jolt" class="full-circle" onclick="hero.Jolt()">Jolt</div>
+                        <div id = "life" class="full-circle" onclick="hero.Life()">Life</div>
+                        <div id = "stun" class="full-circle" onclick="hero.Stun()">Stun</div>
                     </div>
                     <div id="controls">
                         <img id="leftControl" src="img/left.png">

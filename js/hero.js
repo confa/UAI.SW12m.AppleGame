@@ -197,6 +197,8 @@ function Hero(x, y){
             self.IsConfused = false;
             self.confuseTimeout = 0;
             self.umbrella = false;
+            var s = jQuery('#invulnerability');
+            jQuery('#invulnerability').css('background-image', 'url(img/invul-deactive.png)');
             jQuery('#invulnerability').attr('disabled','disabled');
         }
     }
@@ -206,6 +208,7 @@ function Hero(x, y){
         {
             gameLevel /= 2;
             self.slowing = false;
+            jQuery('#slow').css('background-image', 'url(img/slow-deactive.png)');
             jQuery('#slow').attr('disabled','disabled');
         }
     }
@@ -221,6 +224,7 @@ function Hero(x, y){
                 }
             });
             self.jolt = false;
+            jQuery('#jolt').css('background-image', 'url(img/bang-deactive.png)');
             jQuery('#jolt').attr('disabled','disabled');
         }
     }
@@ -230,6 +234,7 @@ function Hero(x, y){
         {
             self.HP = 100;
             self.life = false;
+            jQuery('#life').css('background-image', 'url(img/life-deactive.png)');
             jQuery('#life').attr('disabled','disabled');
         }
     }
@@ -240,6 +245,7 @@ function Hero(x, y){
             self.IsConfused = false;
             self.confuseTimeout = 0;
             self.stun = false;
+            jQuery('#stun').css('background-image', 'url(img/poison-deactive.png)');
             jQuery('#stun').attr('disabled','disabled');
         }
     }

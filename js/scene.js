@@ -53,26 +53,31 @@ function intersects() {
                                     hero.umbrella = true;
                                     AnimateMessageToUser("Umbrella!", apple.x, apple.y);
                                     jQuery('#invulnerability').removeAttr('disabled');
+                                    jQuery('#invulnerability').css('background-image', 'url(img/invul-active.png)');
                                 }
                                 else if (bonus < 0.4){
                                     hero.slowing = true;
                                     AnimateMessageToUser("Slow!", apple.x, apple.y);
                                     jQuery('#slow').removeAttr('disabled');
+                                    jQuery('#slow').css('background-image', 'url(img/slow-active.png)');
                                 }
                                 else if (bonus < 0.6){
                                     hero.life = true;
                                     AnimateMessageToUser("Life!", apple.x, apple.y);
                                     jQuery('#life').removeAttr('disabled');
+                                    jQuery('#life').css('background-image', 'url(img/life-active.png)');
                                 }
                                 else if (bonus < 0.8){
                                     hero.stun = true;
                                     AnimateMessageToUser("Stun!", apple.x, apple.y);
                                     jQuery('#stun').removeAttr('disabled');
+                                    jQuery('#stun').css('background-image', 'url(img/poison-active.png)');
                                 }
                                 else {
                                     hero.jolt = true;
                                     AnimateMessageToUser("Jolt!", apple.x, apple.y);
                                     jQuery('#jolt').removeAttr('disabled');
+                                    jQuery('#jolt').css('background-image', 'url(img/bang-active.png)');
                                 }
 
                                 break;
