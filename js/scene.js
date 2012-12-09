@@ -160,7 +160,11 @@ function UpdateGameInfo(ctx)
 
 function drawScene(){
     if(gameOver) return;
-    if(pause) return;
+    if(InGameMenu || pause)
+    {
+        InGameMenu.Render();
+        return;
+    }
     clear();
     drawAllApples(ctx);
     appleRipening();
@@ -177,6 +181,7 @@ function Initialization()
 {
     hero = new Hero(500,500);
 
+    jQuery('#gameInfo').removeAttr('hidden');
     jQuery('#invulnerability').removeAttr('disabled');
     jQuery('#life').removeAttr('disabled');
     jQuery('#stun').removeAttr('disabled');
@@ -196,9 +201,13 @@ function Initialization()
 
 // initialization
 
-$(function(){
+window.onload = function(){
     canvas = document.getElementById('scene');
     ctx = canvas.getContext('2d');
+
+    setInterval(updateGameTime, 1);
+
+    drawMainMenu();
 
     // lock scroll position, but retain settings for later
     var scrollPosition = [
@@ -215,11 +224,8 @@ $(function(){
 
     width = canvas.width;
     height = canvas.height;
-
-    Initialization();
     ApplyControls();
-    AnimateControls();
-    AnimateMessageToUser("LET'S START!!", 20);
+    //AnimateMessageToUser("LET'S START!!", 20);
 
     setInterval(drawScene, 20);
-});
+};

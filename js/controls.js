@@ -14,7 +14,7 @@ function ApplyControls()
     canvas.onmousedown = function(e){
         lastClickTime = Date.now();
         lastClickY = e.offsetY;
-
+        clickedEvent = true;
         var x = e.offsetX;
         if(x > width/2) direction = 'right';
         else direction = 'left';
@@ -22,12 +22,14 @@ function ApplyControls()
     };
 
     canvas.onmousemove = function(e){
+        newPos = GetRelativePosition(canvas, e.pageX, e.pageY);
         var x = e.offsetX;
         if(x > width/2) direction = 'right';
         else direction = 'left';
     };
 
     canvas.onmouseup = function(e){
+        clickedEvent = false;
         if (Date.now() - lastClickTime < maxTimeInterval) {
             if (Math.abs(lastClickY - e.offsetY) > minDistance) {
                 hero.Jump();
@@ -43,6 +45,7 @@ function ApplyControls()
 
     canvas.addEventListener('touchmove', function(event) {
         event.preventDefault();
+        newPos = GetRelativePosition(canvas, event.pageX, event.pageY);
         var touch = event.touches[0];
 
         if (touch.length > 1) {
@@ -56,6 +59,7 @@ function ApplyControls()
 
     canvas.addEventListener('touchstart', function(event) {
         event.preventDefault();
+        clickedEvent = true;
         lastClickTime = Date.now();
         lastClickY = e.offsetY;
 
@@ -73,7 +77,7 @@ function ApplyControls()
 
     canvas.addEventListener('touchend', function(event) {
         event.preventDefault();
-
+        clickedEvent = false;
         if (Date.now() - lastClickTime < maxTimeInterval) {
             if (Math.abs(lastClickY - e.offsetY) > minDistance) {
                 hero.Jump();
@@ -92,7 +96,8 @@ function AnimateControls()
     var rightControl = jQuery('#rightControl');
 
     leftControl.animate({
-        opacity: 1
+        opacity: 1,
+        left: 10
     },4000, function(){
         leftControl.animate({
             opacity: 0
@@ -101,7 +106,8 @@ function AnimateControls()
         })});
 
     rightControl.animate({
-        opacity: 1
+        opacity: 1,
+        left: 690
     },4000, function(){
         rightControl.animate({
             opacity: 0

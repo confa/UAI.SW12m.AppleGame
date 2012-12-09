@@ -20,20 +20,59 @@ function Distance(firstX, firstY, secondX, secondY)
     return Math.sqrt(Math.pow(secondX-firstX,2) + Math.pow(secondY-firstY,2));
 }
 
+function drawMainMenu()
+{
+    jQuery('#gameInfo').attr('hidden' ,'hidden');
+
+    InGameMenu = new Menu("Game Menu",
+        [ "Start", "Awards"],
+        "",
+        70, 50, 400,
+        function(numItem) {
+            if (numItem == 0)
+            {
+                InGameMenu = null;
+                jQuery('#gameInfo').removeAttr('hidden');
+                Initialization();
+                AnimateControls();
+            }
+            else if (numItem == 1) window.location.href = "awards.html";
+        },
+        function(elapsed) { });
+}
+
+function updateGameTime()
+{
+    gameTime++;
+}
+
 function Pause()
 {
     if(pause == true)
     {
         pause = false;
         newAppleInterval = setInterval(AddNewApple, gameLevel);
-        AnimateMessageToUser("Let's continue!", 300, height - 50);
+        jQuery('#gameInfo').removeAttr('hidden');
+        //AnimateMessageToUser("Let's continue!", 300, height - 50);
     }
     else
     {
         pause = true;
         clearInterval(newAppleInterval);
-        AnimateMessageToUser("PAUSE", 300, height - 50);
-        jQuery('#score').text("Pause");
+        //AnimateMessageToUser("PAUSE", 300, height - 50);
+        //jQuery('#score').text("Pause");
+        jQuery('#gameInfo').attr('hidden', 'hidden');
+        InGameMenu = new Menu("Game Menu",
+            [ "Continue", "Restart" , "Back to main"],
+            "",
+            70, 50, 400,
+            function(numItem) {
+                if (numItem == 0) { Pause(); InGameMenu = null;  }
+                else if (numItem == 1) restart();
+                else if (numItem == 2) drawMainMenu();
+            },
+            function(elapsed) { });
+
     }
 }
 
@@ -98,6 +137,8 @@ function clear() {
 // Function for game restarting.
 function restart()
 {
+    InGameMenu = null;
+    pause = false;
     Initialization();
 }
 

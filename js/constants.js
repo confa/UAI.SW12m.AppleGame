@@ -15,6 +15,10 @@ var gameLevel;
 var pause;
 var newAppleInterval;
 var db;
+var InGameMenu = null;
+var newPos;
+var clickedEvent = false;
+var gameTime = 0;
 
 var catchedMessages = ["Catched!", "YEAH!", "Pick!", "Good!", "Perfect!", "Excellent!", "RAMPAGE!!!"];
 
