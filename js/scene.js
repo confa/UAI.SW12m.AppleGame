@@ -4,6 +4,12 @@ function intersects() {
         // define intersect
         var intersect = positionOf(boundingRect(apple), boundingRect(hero));
 
+        if(gatheringAudio == undefined || strikeAudio == undefined)
+        {
+            var gatheringAudio = document.getElementById('carry');
+            var strikeAudio = document.getElementById('strike');
+        }
+
         switch (intersect)
         {
             case '#WEST#':
@@ -13,7 +19,7 @@ function intersects() {
                     if(apple.isDrawing)
                     {
                         apple.isDrawing = false;
-
+                        gatheringAudio.play();
                         switch (apple.Type)
                         {
                             case ApplesType.NORMAL:
@@ -98,13 +104,17 @@ function intersects() {
                 {
                     apple.isDrawing = false;
                     hero.HP -= 7;
-                    hero.Confuse(4000);
+                    if(hero.confuseTimeout == 0)
+                    {
+                        hero.Confuse(4000);
+                    }
                     AnimateMessageToUser("OOUPS!", apple.x, apple.y)
 
                     gameLevel > 30
                         ? gameLevel += 30
                         : gameLevel = 30;
 
+                    strikeAudio.play();
                     clearInterval(newAppleInterval);
                     newAppleInterval = setInterval(AddNewApple, gameLevel);
                 }
@@ -134,10 +144,12 @@ function UpdateGameInfo(ctx)
 
     if(hero.HP < 0) {
         gameOver = true;
-        if(gameOver) {
-            jQuery('#gameOver').modal();
-            jQuery('#scoreModal').text(TotalScore);
-        };
+        if(gameOverAudio == undefined) {
+            gameOverAudio = document.getElementById('gameover');
+        }
+        jQuery('#gameOver').modal();
+        jQuery('#scoreModal').text(TotalScore);
+        gameOverAudio.play();
     }
     else if(hero.HP < 30)
     {
@@ -168,7 +180,7 @@ function drawScene(){
     clear();
     drawAllApples(ctx);
     appleRipening();
-    appleDisappearance();
+    //appleDisappearance();
     appleFalling();
     hero.DrawHero(ctx);
     hero.Update();
@@ -197,6 +209,7 @@ function Initialization()
     apples = [];
     gameOver=false;
     pause = false;
+
 }
 
 // initialization

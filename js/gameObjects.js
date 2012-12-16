@@ -13,6 +13,7 @@ function Apple(x, y){
     this.isFalling = false;
     this.isDrawing = true;
     this.speed = 5+Random(7);
+    this.currentFrame = 0;
 
     var self = this;
 
@@ -23,20 +24,16 @@ function Apple(x, y){
             switch (self.Type)
             {
                 case ApplesType.NORMAL:
-                    ctx.drawImage(normalAppleTexture, 0, 0, appleWidth, appleHeight,
-                        self.x, self.y, appleWidth, appleHeight);
+                    ctx.drawImage (normalAppleTexture, appleWidth * this.currentFrame  + this.currentFrame, 0,
+                        appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
                     break;
                 case ApplesType.WORMY:
-                    ctx.drawImage(wormyAppleTexture, 0, 0, appleWidth, appleHeight,
-                        self.x, self.y, appleWidth, appleHeight);
-                    break;
-                case ApplesType.CONFUSED:
-                    ctx.drawImage(confuseAppleTexture, 0, 0, appleWidth, appleHeight,
-                        self.x, self.y, appleWidth, appleHeight);
+                    ctx.drawImage (wormyAppleTexture, appleWidth * this.currentFrame  + this.currentFrame, 0,
+                        appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
                     break;
                 case ApplesType.BONUS:
-                    ctx.drawImage(bonusAppleTexture, 0, 0, appleWidth, appleHeight,
-                        self.x, self.y, appleWidth, appleHeight);
+                    ctx.drawImage (bonusAppleTexture, appleWidth * this.currentFrame  + this.currentFrame, 0,
+                        appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
                     break;
             }
         }
@@ -132,12 +129,14 @@ function appleRipening(){
     for (var i=0; i< apples.length; i++)
     {
         if(!apples[i].isFalling){
-            var colorLambda = 1+Random(2);
-            var r = apples[i].r += colorLambda;
-            var g = apples[i].g -= colorLambda;
+            var r = apples[i].r += appleRiperingSpeed;
 
-            if(g <= 0 && r >=250){
+            if(r == 300){
                 apples[i].isFalling = true;
+            }
+            if(r > apples[i].currentFrame * 300 / appleFrameCount && apples[i].currentFrame < appleFrameCount - 1)
+            {
+                apples[i].currentFrame++;
             }
         }
     }
@@ -153,8 +152,6 @@ function newApple(){
 
     if(appleType < 0.85)
         apple.Type = ApplesType.NORMAL;
-    else if (appleType < 0.9)
-        apple.Type = ApplesType.CONFUSED
     else if (appleType < 0.95)
         apple.Type = ApplesType.WORMY
     else

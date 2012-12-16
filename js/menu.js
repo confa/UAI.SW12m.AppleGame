@@ -18,12 +18,11 @@ Menu.prototype.constructor = Menu;
 Menu.prototype.Render = function(elapsed)
 {
 
-        var lingrad = ctx.createLinearGradient(0,0,0,canvas.height);
-        lingrad.addColorStop(0, '#000');
-        lingrad.addColorStop(1, '#023');
-        ctx.fillStyle = lingrad;
-        ctx.fillRect(0,0,canvas.width, canvas.height);
-
+    var lingrad = ctx.createLinearGradient(0,0,0,canvas.height);
+    lingrad.addColorStop(0, '#063A01');
+    lingrad.addColorStop(1, '#359209');
+    ctx.fillStyle = lingrad;
+    ctx.fillRect(0,0,canvas.width, canvas.height);
 
     ctx.textAlign = "center";
     ctx.fillStyle = "White";
@@ -32,7 +31,14 @@ Menu.prototype.Render = function(elapsed)
     if (this.title)
     {
         ctx.font = Math.floor(this.size*1.3).toString() + "px Times New Roman";
-        ctx.fillText(this.title, canvas.width/2, y);
+        var text = this.title;
+        var blur = 10;
+        ctx.textBaseline = "top";
+        ctx.shadowColor = "#000";
+        ctx.shadowOffsetX = 13;
+        ctx.shadowOffsetY = 0;
+        ctx.shadowBlur = blur;
+        ctx.fillText(text, canvas.width/2, y);
         y += this.size;
     }
 
@@ -99,16 +105,27 @@ Menu.prototype.Input = function()
         return;
     }
 
-    var prevSelected = this.selectedItem;
-
     var leftx = (canvas.width - this.width)/2;
     if (this.lastMouseX >= leftx && this.lastMouseX < leftx+this.width)
     {
+        if(menuChangeAudio == undefined)
+        {
+            menuChangeAudio = document.getElementById('menuChange');
+        }
+
+        if(prevSelected != this.selectedItem)
+        {
+            menuChangeAudio.play();
+            prevSelected = this.selectedItem;
+        }
         var y = this.y + this.size*0.2; // Adjust for baseline
         if (this.title)
             y += this.size;
         if (this.lastMouseY >= y && this.lastMouseY < (y + this.size*this.items.length))
+        {
             this.selectedItem = Math.floor((this.lastMouseY - y)/this.size);
+        }
+
     }
 }
 

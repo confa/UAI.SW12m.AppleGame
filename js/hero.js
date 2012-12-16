@@ -71,7 +71,8 @@ function Hero(x, y){
     {
         self.currentFrame = (self.currentFrame+1)%frameCount;
         if(self.IsConfused)
-            ctx.drawImage(self.confuseTexture, 0, 0, 34, 42, self.x, self.y, heroWidth, heroHeight);
+            ctx.drawImage (self.confuseTexture, frameWidth * (self.currentFrame%4) + self.currentFrame%4, 0,
+                34, 55, self.x, self.y - 12, heroWidth, heroHeight + 12);
         else {
             if( !self.IsRunning )
                 ctx.drawImage(self.idleTexture, 0, 0, 34, 42, self.x, self.y, heroWidth, heroHeight);

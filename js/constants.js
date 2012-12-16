@@ -50,6 +50,8 @@ var fallingLambda = 0.5;
 // Constants and variables related to game objects (apples, bonuses etc.)
 var appleWidth = 50;
 var appleHeight = 50;
+var appleFrameCount = 6;
+var appleRiperingSpeed = 2;
 
 var normalAppleTexture = new Image();
 normalAppleTexture.src = 'img/normalApple.png';
@@ -62,3 +64,10 @@ confuseAppleTexture.src = 'img/confuseApple.png';
 
 var wormyAppleTexture = new Image();
 wormyAppleTexture.src = 'img/wormyApple.png';
+
+// audio
+var prevSelected;
+var gatheringAudio;
+var strikeAudio;
+var menuChangeAudio;
+var gameOverAudio;

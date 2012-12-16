@@ -24,10 +24,10 @@ function drawMainMenu()
 {
     jQuery('#gameInfo').attr('hidden' ,'hidden');
 
-    InGameMenu = new Menu("Game Menu",
+    InGameMenu = new Menu("Apple Game",
         [ "Start", "Awards"],
         "",
-        70, 50, 400,
+        200, 50, 400,
         function(numItem) {
             if (numItem == 0)
             {
@@ -38,7 +38,7 @@ function drawMainMenu()
             }
             else if (numItem == 1) window.location.href = "awards.html";
         },
-        function(elapsed) { });
+        function(elapsed) {ctx.shadowOffsetX = 5; });
 }
 
 function updateGameTime()
@@ -62,16 +62,16 @@ function Pause()
         //AnimateMessageToUser("PAUSE", 300, height - 50);
         //jQuery('#score').text("Pause");
         jQuery('#gameInfo').attr('hidden', 'hidden');
-        InGameMenu = new Menu("Game Menu",
+        InGameMenu = new Menu("Apple mania",
             [ "Continue", "Restart" , "Back to main"],
             "",
-            70, 50, 400,
+            200, 50, 400,
             function(numItem) {
                 if (numItem == 0) { Pause(); InGameMenu = null;  }
                 else if (numItem == 1) restart();
                 else if (numItem == 2) drawMainMenu();
             },
-            function(elapsed) { });
+            function(elapsed) { ctx.shadowOffsetX = 5; });
 
     }
 }
