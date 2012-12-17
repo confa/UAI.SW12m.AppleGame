@@ -14,6 +14,7 @@ function Apple(x, y){
     this.isDrawing = true;
     this.speed = 5+Random(7);
     this.currentFrame = 0;
+    this.disappearanceTimeout = normalDisTimeout;
 
     var self = this;
 
@@ -24,15 +25,15 @@ function Apple(x, y){
             switch (self.Type)
             {
                 case ApplesType.NORMAL:
-                    ctx.drawImage (normalAppleTexture, appleWidth * this.currentFrame  + this.currentFrame, 0,
+                    ctx.drawImage (normalAppleTexture, appleWidth * this.currentFrame, 0,
                         appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
                     break;
                 case ApplesType.WORMY:
-                    ctx.drawImage (wormyAppleTexture, appleWidth * this.currentFrame  + this.currentFrame, 0,
-                        appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                    ctx.drawImage (wormyAppleTexture, 72 * this.currentFrame, 0,
+                        72, 70, self.x, self.y - 10, 72, 70);
                     break;
                 case ApplesType.BONUS:
-                    ctx.drawImage (bonusAppleTexture, appleWidth * this.currentFrame  + this.currentFrame, 0,
+                    ctx.drawImage (bonusAppleTexture, appleWidth * this.currentFrame, 0,
                         appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
                     break;
             }
@@ -114,12 +115,20 @@ function appleFalling()
 // it will disappeared
 function appleDisappearance()
 {
-    for (var i=0; i< apples.length; i++)
+    Enumerable.From(apples).ForEach(function(apple, index)
     {
-        if(!apples[i].isFalling && apples[i].y + apples[i].Height >= height && apples[i].r >=250) {
-            apples[i].isDrawing = false;
+        if(apple.disappearanceTimeout < 0)
+        {
+            apple.isDrawing = false;
         }
-    }
+        else
+        {
+            if(apple.y == height - apple.Height)
+            {
+                apple.disappearanceTimeout -= dissapearingTick;
+            }
+        }
+    });
 }
 
 // Apple ripening time per time
@@ -151,11 +160,20 @@ function newApple(){
     var appleType = Math.random();
 
     if(appleType < 0.85)
+    {
         apple.Type = ApplesType.NORMAL;
+        apple.disappearanceTimeout = normalDisTimeout;
+    }
     else if (appleType < 0.95)
-        apple.Type = ApplesType.WORMY
+    {
+        apple.Type = ApplesType.WORMY;
+        apple.disappearanceTimeout = wormyDisTimeout;
+    }
     else
+    {
         apple.Type = ApplesType.BONUS;
+        apple.disappearanceTimeout = bonusDisTimeout;
+    }
 
     apple.setGravity(gravity);
     return apple;

@@ -106,7 +106,7 @@ function intersects() {
                     hero.HP -= 7;
                     if(hero.confuseTimeout == 0)
                     {
-                        hero.Confuse(4000);
+                        hero.Confuse(confuseTimeout);
                     }
                     AnimateMessageToUser("OOUPS!", apple.x, apple.y)
 
@@ -180,7 +180,7 @@ function drawScene(){
     clear();
     drawAllApples(ctx);
     appleRipening();
-    //appleDisappearance();
+    appleDisappearance();
     appleFalling();
     hero.DrawHero(ctx);
     hero.Update();

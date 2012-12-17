@@ -46,21 +46,25 @@ var maxSpeedX = 10;
 var gravity = 9.8;
 var frameCount = 9;
 var fallingLambda = 0.5;
+var confuseTimeout = 4000;
 
 // Constants and variables related to game objects (apples, bonuses etc.)
 var appleWidth = 50;
-var appleHeight = 50;
-var appleFrameCount = 6;
+var appleHeight = 57;
+var appleFrameCount = 5;
 var appleRiperingSpeed = 2;
+
+// disappearing timeouts
+var normalDisTimeout = 5000;
+var wormyDisTimeout = 3000;
+var bonusDisTimeout = 4000;
+var dissapearingTick = 40;
 
 var normalAppleTexture = new Image();
 normalAppleTexture.src = 'img/normalApple.png';
 
 var bonusAppleTexture = new Image();
 bonusAppleTexture.src = 'img/bonusApple.png';
-
-var confuseAppleTexture = new Image();
-confuseAppleTexture.src = 'img/confuseApple.png';
 
 var wormyAppleTexture = new Image();
 wormyAppleTexture.src = 'img/wormyApple.png';

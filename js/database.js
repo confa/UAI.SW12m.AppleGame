@@ -50,7 +50,7 @@ function addNewScore(name, score)
 {
     db.transaction(function (transaction)
     {
-        transaction.executeSql('INSERT into awards (name, score) VALUES ("'+name+'", "'+score+'");', [], nullDataHandler, errorHandler);
+        transaction.executeSql('INSERT into awards (name, score) VALUES ("'+name+'", '+score+');', [], nullDataHandler, errorHandler);
     });
 }
 
