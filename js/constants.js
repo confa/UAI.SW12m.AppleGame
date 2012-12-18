@@ -38,13 +38,13 @@ var Bonus = {
 }
 
 // Hero constants and variables.
-var frameWidth = 34;
+var frameWidth = 60;
 var heroWidth = 60;
-var heroHeight = 75;
+var heroHeight = 69;
 var maxSpeedY = 15;
 var maxSpeedX = 10;
 var gravity = 9.8;
-var frameCount = 9;
+var frameCount = 5;
 var fallingLambda = 0.5;
 var confuseTimeout = 4000;
 
@@ -53,6 +53,7 @@ var appleWidth = 50;
 var appleHeight = 57;
 var appleFrameCount = 5;
 var appleRiperingSpeed = 2;
+var appleLowSpeed = 2;
 
 // disappearing timeouts
 var normalDisTimeout = 5000;

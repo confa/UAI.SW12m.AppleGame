@@ -24,7 +24,7 @@ function drawMainMenu()
 {
     jQuery('#gameInfo').attr('hidden' ,'hidden');
 
-    InGameMenu = new Menu("Apple Game",
+    InGameMenu = new Menu("Apple Mania",
         [ "Start", "Awards"],
         "",
         200, 50, 400,
@@ -33,6 +33,7 @@ function drawMainMenu()
             {
                 InGameMenu = null;
                 jQuery('#gameInfo').removeAttr('hidden');
+                jQuery('#gameInfo').css('z-index', '1');
                 Initialization();
                 AnimateControls();
             }

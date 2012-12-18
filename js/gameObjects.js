@@ -2,7 +2,7 @@
 function Apple(x, y){
     this.x = x;
     this.y = y;
-    this.ySpeed = 0;
+    this.ySpeed = 5+Random(7);
     this.gravity = 0;
     this.r = 0;
     this.g = 255;
@@ -12,7 +12,6 @@ function Apple(x, y){
     this.Height = appleHeight;
     this.isFalling = false;
     this.isDrawing = true;
-    this.speed = 5+Random(7);
     this.currentFrame = 0;
     this.disappearanceTimeout = normalDisTimeout;
 
@@ -156,7 +155,7 @@ function newApple(){
     var x = Random(width-appleWidth);
     var y = Random(height/2);
     var apple = new Apple(x, y);
-
+    apple.ySpeed = hero.IsSlowed ? appleLowSpeed : 5+Random(7);
     var appleType = Math.random();
 
     if(appleType < 0.85)

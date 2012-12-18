@@ -120,7 +120,7 @@ Menu.prototype.Input = function()
         }
         var y = this.y + this.size*0.2; // Adjust for baseline
         if (this.title)
-            y += this.size;
+            y += this.size*2;
         if (this.lastMouseY >= y && this.lastMouseY < (y + this.size*this.items.length))
         {
             this.selectedItem = Math.floor((this.lastMouseY - y)/this.size);

@@ -20,10 +20,12 @@ function Hero(x, y){
     this.IsJumping = false;
     this.IsConfused = false;
     this.IsInvulnerable = false;
+    this.IsSlowed = false;
 
     // timeouts
     this.confuseTimeout = 0;
     this.invurableTimeout = 0;
+    this.slowingTimeout = 0;
 
     // hero speeds
     this.SpeedY = 0;
@@ -81,11 +83,11 @@ function Hero(x, y){
                 {
                     if(self.direction == 'left')
                         ctx.drawImage (self.runLeftTexture, frameWidth * self.currentFrame, 0,
-                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
                     else
                     {
                         ctx.drawImage (self.runRightTexture, frameWidth * self.currentFrame, 0,
-                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
                     }
                 }
                 else
@@ -153,6 +155,19 @@ function Hero(x, y){
 
         // ------------------------
 
+        // ------- slowing ------
+
+        if(self.slowingTimeout > 0)
+        {
+            //self.IsSlowed = true;
+            self.slowingTimeout -= 40;
+        }
+        else
+        {
+            self.IsSlowed = false;
+            self.slowingTimeout = 0;
+        }
+
     };
 
     // hero confuse
@@ -207,8 +222,15 @@ function Hero(x, y){
     this.Slow = function() {
         if(self.slowing)
         {
-            gameLevel /= 2;
+            Enumerable.From(apples).ForEach(function(apple)
+            {
+                if(apple.isDrawing)
+                {
+                    apple.ySpeed = appleLowSpeed;
+                }
+            });
             self.slowing = false;
+            self.slowingTimeout = 10000;
             jQuery('#slow').css('background-image', 'url(img/slow-deactive.png)');
             jQuery('#slow').attr('disabled','disabled');
         }
