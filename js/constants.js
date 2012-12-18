@@ -40,7 +40,7 @@ var Bonus = {
 // Hero constants and variables.
 var frameWidth = 60;
 var heroWidth = 60;
-var heroHeight = 69;
+var heroHeight = 65;
 var maxSpeedY = 15;
 var maxSpeedX = 10;
 var gravity = 9.8;
