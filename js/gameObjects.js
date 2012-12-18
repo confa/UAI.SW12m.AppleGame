@@ -12,6 +12,10 @@ function Apple(x, y){
     this.Height = appleHeight;
     this.isFalling = false;
     this.isDrawing = true;
+    this.speed = 5+Random(7);
+
+    this.prevFrameDrawCounter = 0;
+    this.prevFrame = 0;
     this.currentFrame = 0;
     this.disappearanceTimeout = normalDisTimeout;
 
@@ -144,6 +148,8 @@ function appleRipening(){
             }
             if(r > apples[i].currentFrame * 300 / appleFrameCount && apples[i].currentFrame < appleFrameCount - 1)
             {
+                apples[i].prevFrameDrawCounter = 30;
+                apples[i].prevFrame = apples[i].currentFrame;
                 apples[i].currentFrame++;
             }
         }

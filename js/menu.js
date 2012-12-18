@@ -34,10 +34,10 @@ Menu.prototype.Render = function(elapsed)
         var text = this.title;
         var blur = 10;
         ctx.textBaseline = "top";
-        ctx.shadowColor = "#000";
-        ctx.shadowOffsetX = 13;
-        ctx.shadowOffsetY = 0;
-        ctx.shadowBlur = blur;
+//        ctx.shadowColor = "#000";
+//        ctx.shadowOffsetX = 13;
+//        ctx.shadowOffsetY = 0;
+//        ctx.shadowBlur = blur;
         ctx.fillText(text, canvas.width/2, y);
         y += this.size;
     }
