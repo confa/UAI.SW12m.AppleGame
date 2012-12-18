@@ -30,14 +30,38 @@ function Apple(x, y){
                 case ApplesType.NORMAL:
                     ctx.drawImage (normalAppleTexture, appleWidth * this.currentFrame, 0,
                         appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+
+                    if (this.prevFrameDrawCounter > 0) {
+                        this.prevFrameDrawCounter--;
+                        ctx.globalAlpha = this.prevFrameDrawCounter/30.0;
+                        ctx.drawImage (normalAppleTexture, appleWidth * this.prevFrame, 0,
+                            appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                        ctx.globalAlpha = 1;
+                    }
                     break;
                 case ApplesType.WORMY:
                     ctx.drawImage (wormyAppleTexture, 72 * this.currentFrame, 0,
                         72, 70, self.x, self.y - 10, 72, 70);
+
+                    if (this.prevFrameDrawCounter > 0) {
+                        this.prevFrameDrawCounter--;
+                        ctx.globalAlpha = this.prevFrameDrawCounter/30.0;
+                        ctx.drawImage (wormyAppleTexture, 72 * this.prevFrame, 0,
+                            72, 70, self.x, self.y - 10, 72, 70);
+                        ctx.globalAlpha = 1;
+                    }
                     break;
                 case ApplesType.BONUS:
                     ctx.drawImage (bonusAppleTexture, appleWidth * this.currentFrame, 0,
                         appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+
+                    if (this.prevFrameDrawCounter > 0) {
+                        this.prevFrameDrawCounter--;
+                        ctx.globalAlpha = this.prevFrameDrawCounter/30.0;
+                        ctx.drawImage (bonusAppleTexture, appleWidth * this.prevFrame, 0,
+                            appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                        ctx.globalAlpha = 1;
+                    }
                     break;
             }
         }
