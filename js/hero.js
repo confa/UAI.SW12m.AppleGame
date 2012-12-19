@@ -71,34 +71,38 @@ function Hero(x, y){
     // Drawing hero
     this.DrawHero = function (ctx)
     {
-        self.currentFrame = (self.currentFrame+1)%frameCount;
+        if(gameTime%5 == 0)
+        {
+            self.currentFrame = (self.currentFrame+1)%maxFrameCount;
+        }
         if(self.IsConfused)
-            ctx.drawImage (self.confuseTexture, frameWidth * (self.currentFrame%4) + self.currentFrame%4, 0,
-                34, 55, self.x, self.y - 12, heroWidth, heroHeight + 12);
+            ctx.drawImage (self.confuseTexture, frameWidth * (self.currentFrame%(self.confuseTexture.width / frameWidth)), 0,
+                heroWidth, heroHeight, self.x, self.y - 15, heroWidth, heroHeight + 15);
         else {
             if( !self.IsRunning )
-                ctx.drawImage(self.idleTexture, 0, 0, 34, 42, self.x, self.y, heroWidth, heroHeight);
+                ctx.drawImage (self.idleTexture, frameWidth * (self.currentFrame%(self.idleTexture.width / frameWidth)), 0,
+                    heroWidth, heroHeight, self.x, self.y - 20, heroWidth, heroHeight + 20);
             else{
                 if(!self.IsInvulnerable)
                 {
                     if(self.direction == 'left')
-                        ctx.drawImage (self.runLeftTexture, frameWidth * self.currentFrame, 0,
+                        ctx.drawImage (self.runLeftTexture, frameWidth * (self.currentFrame%(self.runLeftTexture.width / frameWidth)), 0,
                             heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
                     else
                     {
-                        ctx.drawImage (self.runRightTexture, frameWidth * self.currentFrame, 0,
+                        ctx.drawImage (self.runRightTexture, frameWidth * (self.currentFrame%(self.runRightTexture.width / frameWidth)), 0,
                             heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
                     }
                 }
                 else
                 {
                     if(self.direction == 'left')
-                        ctx.drawImage (self.invulnerableRunLeftTexture, frameWidth * self.currentFrame, 0,
-                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                        ctx.drawImage (self.invulnerableRunLeftTexture, frameWidth * (self.currentFrame%(self.invulnerableRunLeftTexture.width / frameWidth)), 0,
+                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
                     else
                     {
-                        ctx.drawImage (self.invulnerableRunRightTexture, frameWidth * self.currentFrame, 0,
-                            34, 42, self.x, self.y, heroWidth, heroHeight);
+                        ctx.drawImage (self.invulnerableRunRightTexture, frameWidth * (self.currentFrame%(self.invulnerableRunRightTexture.width / frameWidth)), 0,
+                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
                     }
                 }
             }

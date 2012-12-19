@@ -38,13 +38,13 @@ var Bonus = {
 }
 
 // Hero constants and variables.
-var frameWidth = 60;
-var heroWidth = 60;
-var heroHeight = 65;
+var frameWidth = 100;
+var heroWidth = 100;
+var heroHeight = 105;
 var maxSpeedY = 15;
 var maxSpeedX = 10;
 var gravity = 9.8;
-var frameCount = 5;
+var maxFrameCount = 14;
 var fallingLambda = 0.5;
 var confuseTimeout = 4000;
 
