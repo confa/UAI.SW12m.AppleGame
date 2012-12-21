@@ -218,7 +218,7 @@ window.onload = function(){
     canvas = document.getElementById('scene');
     ctx = canvas.getContext('2d');
 
-    setInterval(updateGameTime, 10);
+    setInterval(updateGameTime, 20);
 
     drawMainMenu();
 

@@ -1,4 +1,7 @@
 /* general styles */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
 
 *{
     margin:0;
@@ -31,11 +34,6 @@ body {
 
 .container {
     width:100%;
-}
-
-.container > * {
-    display:block;
-    margin:50px auto;
 }
 
 .full-circle {
@@ -153,8 +151,7 @@ h3 {
 
 #gameInfo{
     position: absolute;
-    top: 80px;
-    z-index: -1000;
+    top: 10px;
 }
 
 #controls{

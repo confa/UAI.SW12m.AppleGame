@@ -25,54 +25,52 @@
 </head>
 
 <body>
-<!-- Modal -->
-<div id="gameOver" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Game Over</h3>
-    </div>
-    <div class="modal-body">
-        <form class="form-actions">
-            <p>Your score: </p> <div id="scoreModal"></div>
-            <label for="playerName">Your name:</label>
-            <input id="playerName" type="text" class="input-small search-query">
-            <button type="submit" class="btn" onclick="SaveResults()">Save</button>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="restart()">Try again</button>
-    </div>
-</div>
-
-<div class="container">
-    <fieldset>
-        <div class="row">
-            <canvas class="img-rounded" id="scene" width="800" height="600"></canvas>
-            <div id="gameInfo">
-                <div class="progress progress-striped active span4">
-                    <div id="health" class="bar bar-success" style="width: 100%;"></div>
-                </div>
-                <div id="scorePanel">
-                    <span id="score">0</span>
-                </div>
-                <div id="info"></div>
-                <div id="leftBonuses">
-                    <div id = "pause" class="full-circle" onclick="Pause()">Pause</div>
-                    <div id = "invulnerability" class="full-circle" onclick="hero.Invulnerable()">Invulnerability</div>
-                    <div id = "slow" class="full-circle" onclick="hero.Slow()">Slow</div>
-                </div>
-                <div id="rightBonuses">
-                    <div id = "jolt" class="full-circle" onclick="hero.Jolt()">Jolt</div>
-                    <div id = "life" class="full-circle" onclick="hero.Life()">Life</div>
-                    <div id = "stun" class="full-circle" onclick="hero.Stun()">Stun</div>
-                </div>
-                <div id="controls">
-                    <img id="leftControl" src="img/left.png">
-                    <img id="rightControl" src="img/right.png">
-                </div>
+    <div>
+        <canvas id="scene" width="800" height="600"></canvas>
+        <div id="gameInfo" >
+            <div class="progress progress-striped active span4">
+                <div id="health" class="bar bar-success" style="width: 100%;"></div>
+            </div>
+            <div id="scorePanel">
+                <span id="score">0</span>
+            </div>
+            <div id="info"></div>
+            <div id="leftBonuses">
+                <div id = "pause" class="full-circle" onclick="Pause()">Pause</div>
+                <div id = "invulnerability" class="full-circle" onclick="hero.Invulnerable()">Invulnerability</div>
+                <div id = "slow" class="full-circle" onclick="hero.Slow()">Slow</div>
+            </div>
+            <div id="rightBonuses">
+                <div id = "jolt" class="full-circle" onclick="hero.Jolt()">Jolt</div>
+                <div id = "life" class="full-circle" onclick="hero.Life()">Life</div>
+                <div id = "stun" class="full-circle" onclick="hero.Stun()">Stun</div>
+            </div>
+            <div id="controls">
+                <img id="leftControl" src="img/left.png">
+                <img id="rightControl" src="img/right.png">
             </div>
         </div>
-    </fieldset>
+    </div>
+
+    <!-- Modal -->
+    <div id="gameOver" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Game Over</h3>
+        </div>
+        <div class="modal-body">
+            <form class="form-actions">
+                <p>Your score: </p> <div id="scoreModal"></div>
+                <label for="playerName">Your name:</label>
+                <input id="playerName" type="text" class="input-small search-query">
+                <button type="submit" class="btn" onclick="SaveResults()">Save</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true" onclick="restart()">Try again</button>
+        </div>
+    </div>
+
     <audio id="carry" src="audio/carry.mp3"></audio>
     <audio id="gameover" src="audio/gameover.mp3"></audio>
     <audio id="strike" src="audio/strike.mp3"></audio>
