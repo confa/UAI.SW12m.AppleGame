@@ -29,37 +29,37 @@ function Apple(x, y){
             {
                 case ApplesType.NORMAL:
                     ctx.drawImage (normalAppleTexture, appleWidth * this.currentFrame, 0,
-                        appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                        appleWidth, appleHeight, self.x, self.y, appleWidth * scaleFactor, appleHeight * scaleFactor);
 
                     if (this.prevFrameDrawCounter > 0) {
                         this.prevFrameDrawCounter--;
                         ctx.globalAlpha = this.prevFrameDrawCounter/30.0;
                         ctx.drawImage (normalAppleTexture, appleWidth * this.prevFrame, 0,
-                            appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                            appleWidth, appleHeight, self.x, self.y, appleWidth * scaleFactor, appleHeight * scaleFactor);
                         ctx.globalAlpha = 1;
                     }
                     break;
                 case ApplesType.WORMY:
                     ctx.drawImage (wormyAppleTexture, 72 * this.currentFrame, 0,
-                        72, 70, self.x, self.y - 10, 72, 70);
+                        72, 70, self.x, self.y - 10, 72 * scaleFactor, 70 * scaleFactor);
 
                     if (this.prevFrameDrawCounter > 0) {
                         this.prevFrameDrawCounter--;
                         ctx.globalAlpha = this.prevFrameDrawCounter/30.0;
                         ctx.drawImage (wormyAppleTexture, 72 * this.prevFrame, 0,
-                            72, 70, self.x, self.y - 10, 72, 70);
+                            72, 70, self.x, self.y - 10, 72 * scaleFactor, 70 * scaleFactor);
                         ctx.globalAlpha = 1;
                     }
                     break;
                 case ApplesType.BONUS:
                     ctx.drawImage (bonusAppleTexture, appleWidth * this.currentFrame, 0,
-                        appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                        appleWidth, appleHeight, self.x, self.y, appleWidth * scaleFactor, appleHeight * scaleFactor);
 
                     if (this.prevFrameDrawCounter > 0) {
                         this.prevFrameDrawCounter--;
                         ctx.globalAlpha = this.prevFrameDrawCounter/30.0;
                         ctx.drawImage (bonusAppleTexture, appleWidth * this.prevFrame, 0,
-                            appleWidth, appleHeight, self.x, self.y, appleWidth, appleHeight);
+                            appleWidth, appleHeight, self.x, self.y, appleWidth * scaleFactor, appleHeight * scaleFactor);
                         ctx.globalAlpha = 1;
                     }
                     break;
@@ -132,7 +132,7 @@ function appleFalling()
         {
             if(apples[i].isFalling)
             {
-                apples[i].y = height - apples[i].Height;
+                apples[i].y = height - apples[i].Height * scaleFactor - Random(apples[i].Height * scaleFactor / 3);
             }
             apples[i].isFalling = false;
         }

@@ -1,4 +1,6 @@
 // Simple menu class
+var menuCounter = 0;
+var menuCounterIncrease = 10;
 
 Menu = function(title, items, footer, y, size, width, callback, backgroundCallback)
 {
@@ -17,7 +19,6 @@ Menu.prototype.constructor = Menu;
 
 Menu.prototype.Render = function(elapsed)
 {
-
     var lingrad = ctx.createLinearGradient(0,0,0,canvas.height);
     lingrad.addColorStop(0, '#063A01');
     lingrad.addColorStop(1, '#359209');
@@ -42,13 +43,22 @@ Menu.prototype.Render = function(elapsed)
         y += this.size;
     }
 
-    for (var i = 0; i < this.items.length; ++i)
+    for (var i = 0; i < this.items.length; i++)
     {
         var size = Math.floor(this.size*0.8);
         if (i == this.selectedItem)
         {
-            var v = Math.floor(127*Math.sin(Random(gameTime)*0.04) + 127);
-            ctx.fillStyle = "rgba(255,255,"+v.toString()+",255)";
+//            var v = Math.floor(127*Math.sin(Random(gameTime)*0.04) + 127);
+            if (menuCounter > 255) {
+                menuCounterIncrease = -10;
+            } else if (menuCounter < 0) {
+                menuCounterIncrease = 10;
+            }
+
+            menuCounter += menuCounterIncrease;
+
+            var v = menuCounter;
+            ctx.fillStyle = "rgba(255,"+v.toString()+",255,255)";
             size = this.size;
         }
         ctx.font = size.toString() + "px Times New Roman";
@@ -83,6 +93,8 @@ function GetRelativePosition(target, x,y) {
 
 Menu.prototype.Input = function()
 {
+//    console.log(this.lastMouseX);
+
     if(!newPos)
     {
         this.deltaX = 0 - this.lastMouseX;
@@ -117,7 +129,7 @@ Menu.prototype.Input = function()
             menuChangeAudio = document.getElementById('menuChange');
         }
 
-        if(prevSelected != this.selectedItem)
+        if(prevSelected != this.selectedItem && menuChangeAudio != undefined)
         {
             menuChangeAudio.play();
             prevSelected = this.selectedItem;

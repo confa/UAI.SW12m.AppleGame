@@ -19,7 +19,11 @@ function intersects() {
                     if(apple.isDrawing)
                     {
                         apple.isDrawing = false;
-                        gatheringAudio.play();
+
+                        if (gatheringAudio != undefined) {
+                            gatheringAudio.play();
+                        }
+
                         switch (apple.Type)
                         {
                             case ApplesType.NORMAL:
@@ -114,7 +118,10 @@ function intersects() {
                         ? gameLevel += 30
                         : gameLevel = 30;
 
-                    strikeAudio.play();
+                    if (strikeAudio != undefined) {
+                        strikeAudio.play();
+                    }
+
                     clearInterval(newAppleInterval);
                     newAppleInterval = setInterval(AddNewApple, gameLevel);
                 }
@@ -149,7 +156,10 @@ function UpdateGameInfo(ctx)
         }
         jQuery('#gameOver').modal();
         jQuery('#scoreModal').text(TotalScore);
-        gameOverAudio.play();
+
+        if (gameOverAudio != undefined) {
+            gameOverAudio.play();
+        }
     }
     else if(hero.HP < 30)
     {
@@ -191,7 +201,10 @@ function drawScene(){
 
 function Initialization()
 {
-    hero = new Hero(500,500);
+    var newHeroX = Random(window.width - 100);
+    var newHeroY = 500;
+
+    hero = new Hero(newHeroX, newHeroY);
 
     jQuery('#gameInfo').removeAttr('hidden');
     jQuery('#invulnerability').removeAttr('disabled');
@@ -218,6 +231,9 @@ window.onload = function(){
     canvas = document.getElementById('scene');
     ctx = canvas.getContext('2d');
 
+    ctx.canvas.width  = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+
     setInterval(updateGameTime, 20);
 
     drawMainMenu();
@@ -237,6 +253,9 @@ window.onload = function(){
 
     width = canvas.width;
     height = canvas.height;
+
+    scaleFactor = width / 800.0;
+
     ApplyControls();
     //AnimateMessageToUser("LET'S START!!", 20);
 

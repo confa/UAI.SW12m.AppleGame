@@ -29,7 +29,7 @@ function Hero(x, y){
 
     // hero speeds
     this.SpeedY = 0;
-    this.SpeedX = maxSpeedX;
+    this.SpeedX = maxSpeedX * scaleFactor;
 
     // direction for moving
     this.direction = 'right';
@@ -77,32 +77,32 @@ function Hero(x, y){
         }
         if(self.IsConfused)
             ctx.drawImage (self.confuseTexture, frameWidth * (self.currentFrame%(self.confuseTexture.width / frameWidth)), 0,
-                heroWidth, heroHeight, self.x, self.y - 15, heroWidth, heroHeight + 15);
+                heroWidth, heroHeight, self.x, self.y, heroWidth * scaleFactor, heroHeight * scaleFactor);
         else {
             if( !self.IsRunning )
                 ctx.drawImage (self.idleTexture, frameWidth * (self.currentFrame%(self.idleTexture.width / frameWidth)), 0,
-                    heroWidth, heroHeight, self.x, self.y - 20, heroWidth, heroHeight + 20);
+                    heroWidth, heroHeight, self.x, self.y, heroWidth * scaleFactor, heroHeight * scaleFactor);
             else{
                 if(!self.IsInvulnerable)
                 {
                     if(self.direction == 'left')
                         ctx.drawImage (self.runLeftTexture, frameWidth * (self.currentFrame%(self.runLeftTexture.width / frameWidth)), 0,
-                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
+                            heroWidth, heroHeight, self.x, self.y, heroWidth * scaleFactor, heroHeight * scaleFactor);
                     else
                     {
                         ctx.drawImage (self.runRightTexture, frameWidth * (self.currentFrame%(self.runRightTexture.width / frameWidth)), 0,
-                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
+                            heroWidth, heroHeight, self.x, self.y, heroWidth * scaleFactor, heroHeight * scaleFactor);
                     }
                 }
                 else
                 {
                     if(self.direction == 'left')
                         ctx.drawImage (self.invulnerableRunLeftTexture, frameWidth * (self.currentFrame%(self.invulnerableRunLeftTexture.width / frameWidth)), 0,
-                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
+                            heroWidth, heroHeight, self.x, self.y, heroWidth * scaleFactor, heroHeight * scaleFactor);
                     else
                     {
                         ctx.drawImage (self.invulnerableRunRightTexture, frameWidth * (self.currentFrame%(self.invulnerableRunRightTexture.width / frameWidth)), 0,
-                            heroWidth, heroHeight, self.x, self.y, heroWidth, heroHeight);
+                            heroWidth, heroHeight, self.x, self.y, heroWidth * scaleFactor, heroHeight * scaleFactor);
                     }
                 }
             }
@@ -117,14 +117,14 @@ function Hero(x, y){
         tempY -= self.SpeedY;
         tempY += gravity;
 
-        if(tempY <= height - self.Height)
+        if(tempY <= height - self.Height * scaleFactor)
         {
             self.y = tempY;
-            self.SpeedY -= fallingLambda;
+            self.SpeedY -= fallingLambda * scaleFactor;
         }
         else
         {
-            self.y = height - self.Height;
+            self.y = height - self.Height  * scaleFactor;
             self.IsJumping = false;
         }
         //-------------------------
@@ -185,7 +185,7 @@ function Hero(x, y){
     {
         if(!self.IsJumping && !self.IsConfused)
         {
-            self.SpeedY = maxSpeedY;
+            self.SpeedY = maxSpeedY * scaleFactor;
             self.IsJumping = true;
         }
     }
@@ -200,11 +200,11 @@ function Hero(x, y){
             if(self.IsRunning){
                 if(direction == 'left' && self.x > 0)
                 {
-                    self.x -= maxSpeedX;
+                    self.x -= maxSpeedX * scaleFactor;
                 }
                 if(direction == 'right' && self.x < width - heroWidth)
                 {
-                    self.x += maxSpeedX;
+                    self.x += maxSpeedX * scaleFactor;
                 }
             }
         }

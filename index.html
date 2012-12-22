@@ -25,25 +25,27 @@
 </head>
 
 <body>
-    <div>
-        <canvas id="scene" width="800" height="600"></canvas>
-        <div id="gameInfo" >
-            <div class="progress progress-striped active span4">
+    <div id="container">
+        <canvas id="scene"></canvas>
+        <div id="gameInfo" width="800" height="600">
+            <div id="healthDiv" class="progress progress-striped active span4">
                 <div id="health" class="bar bar-success" style="width: 100%;"></div>
             </div>
             <div id="scorePanel">
                 <span id="score">0</span>
             </div>
             <div id="info"></div>
-            <div id="leftBonuses">
-                <div id = "pause" class="full-circle" onclick="Pause()">Pause</div>
-                <div id = "invulnerability" class="full-circle" onclick="hero.Invulnerable()">Invulnerability</div>
-                <div id = "slow" class="full-circle" onclick="hero.Slow()">Slow</div>
-            </div>
-            <div id="rightBonuses">
-                <div id = "jolt" class="full-circle" onclick="hero.Jolt()">Jolt</div>
-                <div id = "life" class="full-circle" onclick="hero.Life()">Life</div>
-                <div id = "stun" class="full-circle" onclick="hero.Stun()">Stun</div>
+            <div id="bonuses">
+                <div id="leftBonuses">
+                    <div id = "pause" class="full-circle bonus-style" onclick="Pause()">Pause</div>
+                    <div id = "invulnerability" class="full-circle bonus-style" onclick="hero.Invulnerable()">Invulnerability</div>
+                    <div id = "slow" class="full-circle bonus-style" onclick="hero.Slow()">Slow</div>
+                </div>
+                <div id="rightBonuses">
+                    <div id = "jolt" class="full-circle bonus-style" onclick="hero.Jolt()">Jolt</div>
+                    <div id = "life" class="full-circle bonus-style" onclick="hero.Life()">Life</div>
+                    <div id = "stun" class="full-circle bonus-style" onclick="hero.Stun()">Stun</div>
+                </div>
             </div>
             <div id="controls">
                 <img id="leftControl" src="img/left.png">
@@ -71,10 +73,10 @@
         </div>
     </div>
 
-    <audio id="carry" src="audio/carry.mp3"></audio>
-    <audio id="gameover" src="audio/gameover.mp3"></audio>
-    <audio id="strike" src="audio/strike.mp3"></audio>
-    <audio id="menuChange" src="audio/menuChange.mp3"></audio>
+    <!--<audio id="carry" src="audio/carry.mp3"></audio>-->
+    <!--<audio id="gameover" src="audio/gameover.mp3"></audio>-->
+    <!--<audio id="strike" src="audio/strike.mp3"></audio>-->
+    <!--<audio id="menuChange" src="audio/menuChange.mp3"></audio>-->
     <!-- <audio id="background" src="audio/background.mp3" autoplay="autoplay" loop="loop"></audio> !-->
 </div>
 </body>

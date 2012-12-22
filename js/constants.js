@@ -55,6 +55,8 @@ var appleFrameCount = 5;
 var appleRiperingSpeed = 2;
 var appleLowSpeed = 2;
 
+var scaleFactor = 0;
+
 // disappearing timeouts
 var normalDisTimeout = 5000;
 var wormyDisTimeout = 3000;

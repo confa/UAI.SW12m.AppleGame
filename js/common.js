@@ -122,8 +122,8 @@ function positionOf(point, relativeTo) {
 function boundingRect(object)
 {
     var tempObject = new Object();
-    tempObject.Height = 0.5 * object.Height;
-    tempObject.Width = 0.3 * object.Width;
+    tempObject.Height = 0.5 * object.Height * scaleFactor;
+    tempObject.Width = 0.3 * object.Width * scaleFactor;
     tempObject.x = object.x;
     tempObject.y = object.y;
 
@@ -155,7 +155,6 @@ function AnimateMessageToUser(text, x, y)
     message.attr('id', randomId);
     message.addClass('message');
 
-
     message.css({
         left: x,
         top: y
@@ -166,7 +165,7 @@ function AnimateMessageToUser(text, x, y)
 
     var createdMessage = jQuery('#' + randomId)
 
-    var randomTop = Random(400);
+    var randomTop = Random(400 * scaleFactor);
 
     createdMessage.animate({
         opacity: 1,

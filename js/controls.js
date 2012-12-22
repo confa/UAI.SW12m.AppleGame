@@ -107,7 +107,7 @@ function AnimateControls()
 
     rightControl.animate({
         opacity: 1,
-        left: 690
+        right: ""
     },4000, function(){
         rightControl.animate({
             opacity: 0
