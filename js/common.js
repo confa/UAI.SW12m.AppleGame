@@ -165,7 +165,8 @@ function AnimateMessageToUser(text, x, y)
 
     var createdMessage = jQuery('#' + randomId)
 
-    var randomTop = Random(400 * scaleFactor);
+    var maxTop = Math.floor(400 * scaleFactor);
+    var randomTop = Random(maxTop);
 
     createdMessage.animate({
         opacity: 1,

@@ -120,7 +120,7 @@ function Hero(x, y){
         if(tempY <= height - self.Height * scaleFactor)
         {
             self.y = tempY;
-            self.SpeedY -= fallingLambda * scaleFactor;
+            self.SpeedY -= fallingLambda  * scaleFactor;
         }
         else
         {

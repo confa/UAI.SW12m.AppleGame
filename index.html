@@ -24,33 +24,31 @@
     <!--<script src="lib/prototype-1.6.0.2.js"></script>-->
 </head>
 
-<body>
-    <div id="container">
-        <canvas id="scene"></canvas>
-        <div id="gameInfo" width="800" height="600">
-            <div id="healthDiv" class="progress progress-striped active span4">
-                <div id="health" class="bar bar-success" style="width: 100%;"></div>
+<body onSelectStart = "return false;">
+    <canvas id="scene"></canvas>
+    <div id="gameInfo">
+        <div id="healthDiv" class="progress progress-striped active span4">
+            <div id="health" class="bar bar-success" style="width: 100%;"></div>
+        </div>
+        <div id="scorePanel">
+            <span id="score">0</span>
+        </div>
+        <div id="info"></div>
+        <div id="bonuses">
+            <div id="leftBonuses">
+                <div id = "pause" class="full-circle bonus-style" onclick="Pause()">Pause</div>
+                <div id = "invulnerability" class="full-circle bonus-style" onclick="hero.Invulnerable()">Invulnerability</div>
+                <div id = "slow" class="full-circle bonus-style" onclick="hero.Slow()">Slow</div>
             </div>
-            <div id="scorePanel">
-                <span id="score">0</span>
+            <div id="rightBonuses">
+                <div id = "jolt" class="full-circle bonus-style" onclick="hero.Jolt()">Jolt</div>
+                <div id = "life" class="full-circle bonus-style" onclick="hero.Life()">Life</div>
+                <div id = "stun" class="full-circle bonus-style" onclick="hero.Stun()">Stun</div>
             </div>
-            <div id="info"></div>
-            <div id="bonuses">
-                <div id="leftBonuses">
-                    <div id = "pause" class="full-circle bonus-style" onclick="Pause()">Pause</div>
-                    <div id = "invulnerability" class="full-circle bonus-style" onclick="hero.Invulnerable()">Invulnerability</div>
-                    <div id = "slow" class="full-circle bonus-style" onclick="hero.Slow()">Slow</div>
-                </div>
-                <div id="rightBonuses">
-                    <div id = "jolt" class="full-circle bonus-style" onclick="hero.Jolt()">Jolt</div>
-                    <div id = "life" class="full-circle bonus-style" onclick="hero.Life()">Life</div>
-                    <div id = "stun" class="full-circle bonus-style" onclick="hero.Stun()">Stun</div>
-                </div>
-            </div>
-            <div id="controls">
-                <img id="leftControl" src="img/left.png">
-                <img id="rightControl" src="img/right.png">
-            </div>
+        </div>
+        <div id="controls">
+            <img id="leftControl" src="img/left.png">
+            <img id="rightControl" src="img/right.png">
         </div>
     </div>
 

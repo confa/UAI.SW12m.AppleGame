@@ -254,7 +254,7 @@ window.onload = function(){
     width = canvas.width;
     height = canvas.height;
 
-    scaleFactor = width / 800.0;
+    scaleFactor = height / 600.0;
 
     ApplyControls();
     //AnimateMessageToUser("LET'S START!!", 20);

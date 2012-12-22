@@ -91,27 +91,26 @@ function ApplyControls()
 // Animate left and right controls to user.
 function AnimateControls()
 {
-
     var leftControl = jQuery('#leftControl');
     var rightControl = jQuery('#rightControl');
 
     leftControl.animate({
         opacity: 1,
         left: 10
-    },4000, function(){
+    },2000, function(){
         leftControl.animate({
             opacity: 0
-        },4000, function(){
+        },2000, function(){
             leftControl.remove();
         })});
 
     rightControl.animate({
         opacity: 1,
-        right: ""
-    },4000, function(){
+        right: 10
+    },2000, function(){
         rightControl.animate({
             opacity: 0
-        },4000, function(){
+        },2000, function(){
             rightControl.remove();
         })});
 

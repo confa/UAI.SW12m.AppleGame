@@ -95,6 +95,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* tutorial styles */
 #scene {
     background:url(../img/01.jpg);
+    background-repeat: no-repeat;
     background-size: 100%;
 }
 
@@ -105,43 +106,44 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
         height: 100%;
     }
 
-    #gameInfo {
+    #bonuses {
         position: absolute;
-    }
-
-    #info {
-        position: absolute;
-        width: 50%;
-        height: 50%;
+        top: 20%;
+        width: 100%;
+        height: 30%;
     }
 
     #leftBonuses {
-        height: 40%;
-        width: 30%;
-        left: 5%;
-        margin: 0;
-        position: fixed;
+        position: absolute;
+        height: 30%;
+        width: 7%;
+        left: 3%;
     }
 
     #rightBonuses {
-        height: 40%;
-        width: 30%;
-        right: 5%;
-        margin: 0;
-        position: fixed;
+        position: absolute;
+        height: 30%;
+        width: 7%;
+        right: 3%;
+    }
+
+    #controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
     }
 
     #leftControl {
-        position: fixed;
-        left: 40%;
+        position: absolute;
+        left: 30%;
         top: 50%;
         opacity: 0;
         width: 10%;
     }
 
     #rightControl {
-        position: fixed;
-        right: 40%;
+        position: absolute;
+        right: 100%;
         top: 50%;
         opacity: 0;
         width: 10%;
@@ -150,12 +152,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     #scorePanel {
         position: absolute;
         top: 1%;
-        right: 10%;
+        right: 2%;
     }
 
     #healthDiv {
         position: absolute;
-        top: 1%;
+        top: 2%;
         left: 5%;
         width: 30%;
         height: 3%;
@@ -167,8 +169,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     }
 
     .full-circle {
-        height: 20%;
-        width: 20%;
+        height: 100%;
+        width: 100%;
     }
 
     .bonus-style{
