@@ -42,10 +42,10 @@ function drawMainMenu()
         function(elapsed) {ctx.shadowOffsetX = 5; });
 }
 
-function updateGameTime()
-{
-    gameTime++;
-}
+//function updateGameTime()
+//{
+//    gameTime++;
+//}
 
 function Pause()
 {
@@ -150,12 +150,13 @@ function AnimateMessageToUser(text, x, y)
 {
     var randomId = Random(1000);
 
-    var message = jQuery(document.createElement('span'));
+    var message = jQuery(document.createElement("h6"));
     message.text(text);
     message.attr('id', randomId);
     message.addClass('message');
 
     message.css({
+        position: "absolute",
         left: x,
         top: y
     });
@@ -165,12 +166,12 @@ function AnimateMessageToUser(text, x, y)
 
     var createdMessage = jQuery('#' + randomId)
 
-    var maxTop = Math.floor(400 * scaleFactor);
+    var maxTop = Math.floor(window.height * scaleFactor - 30);
     var randomTop = Random(maxTop);
 
     createdMessage.animate({
         opacity: 1,
-        top: randomTop + 30
+        top: randomTop
     }, 1000, function(){
         createdMessage.animate({
             opacity: 0

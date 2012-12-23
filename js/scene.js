@@ -181,6 +181,7 @@ function UpdateGameInfo(ctx)
 //-----------------------------
 
 function drawScene(){
+    gameTime++;
     if(gameOver) return;
     if(InGameMenu || pause)
     {
@@ -234,7 +235,7 @@ window.onload = function(){
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
-    setInterval(updateGameTime, 20);
+//    setInterval(updateGameTime, 20);
 
     drawMainMenu();
 
