@@ -46,11 +46,11 @@ function Hero(x, y){
 
     // texture for run left
     self.runLeftTexture = new Image();
-    self.runLeftTexture.src = 'img/RunLeft.png';
+    self.runLeftTexture.src = 'img/RunRight.png';
 
     // texture for run right
     self.runRightTexture = new Image();
-    self.runRightTexture.src = 'img/RunRight.png';
+    self.runRightTexture.src = 'img/RunLeft.png';
 
     // texture for run left (God mode)
     self.invulnerableRunLeftTexture = new Image();
