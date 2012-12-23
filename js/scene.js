@@ -206,7 +206,7 @@ function Initialization()
     var newHeroY = 500;
 
     hero = new Hero(newHeroX, newHeroY);
-    hero.HP=5;
+//    hero.HP=5;
 
     jQuery('#gameInfo').removeAttr('hidden');
     jQuery('#invulnerability').removeAttr('disabled');
@@ -235,6 +235,9 @@ window.onload = function(){
 
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
+
+    alert(document.width + " " + window.innerWidth);
+
     scaleFactor = canvas.height / 600.0;
 
 //    setInterval(updateGameTime, 20);

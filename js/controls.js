@@ -61,7 +61,7 @@ function ApplyControls()
         event.preventDefault();
         clickedEvent = true;
         lastClickTime = Date.now();
-        lastClickY = e.offsetY;
+        lastClickY = event.offsetY;
 
         var touch = event.touches[0];
 
@@ -72,6 +72,7 @@ function ApplyControls()
         var x = touch.pageX;
         if(x > width/2) direction = 'right';
         else direction = 'left';
+
         hero.IsRunning = true;
     }, false);
 
@@ -79,7 +80,7 @@ function ApplyControls()
         event.preventDefault();
         clickedEvent = false;
         if (Date.now() - lastClickTime < maxTimeInterval) {
-            if (Math.abs(lastClickY - e.offsetY) > minDistance) {
+            if (Math.abs(lastClickY - event.offsetY) > minDistance) {
                 hero.Jump();
             }
         }
