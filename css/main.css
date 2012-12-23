@@ -14,6 +14,9 @@ body {
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+
+    overflow-y:hidden;
+    overflow-x:hidden;
 }
 
 .full-circle {
@@ -32,8 +35,6 @@ body {
     height:40px;
     text-indent:-999em; /*убираем текстовую ссылку*/
 }
-
-
 
 #invulnerability{
     background-image: url(../img/invul-active.png);
@@ -156,6 +157,20 @@ body {
         left: 5%;
         width: 30%;
         height: 3%;
+    }
+
+    #gameOver {
+        overflow-y:hidden;
+        overflow-x:hidden;
+        left: 5%;
+        top: 5%;
+        width: 90%;
+        height: 90%;
+    }
+
+    #info {
+        overflow-y:hidden;
+        overflow-x:hidden;
     }
 
     .message {

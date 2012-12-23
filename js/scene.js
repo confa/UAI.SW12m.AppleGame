@@ -206,6 +206,7 @@ function Initialization()
     var newHeroY = 500;
 
     hero = new Hero(newHeroX, newHeroY);
+    hero.HP=5;
 
     jQuery('#gameInfo').removeAttr('hidden');
     jQuery('#invulnerability').removeAttr('disabled');
