@@ -24,10 +24,10 @@ function drawMainMenu()
 {
     jQuery('#gameInfo').attr('hidden' ,'hidden');
 
-    InGameMenu = new Menu("Apple Mania",
+    InGameMenu = new Menu("Apple eater",
         [ "Start", "Awards"],
         "",
-        200, 50, 400,
+        120*scaleFactor, 85*scaleFactor, 400*scaleFactor,
         function(numItem) {
             if (numItem == 0)
             {
@@ -63,10 +63,10 @@ function Pause()
         //AnimateMessageToUser("PAUSE", 300, height - 50);
         //jQuery('#score').text("Pause");
         jQuery('#gameInfo').attr('hidden', 'hidden');
-        InGameMenu = new Menu("Apple mania",
+        InGameMenu = new Menu("Apple eater",
             [ "Continue", "Restart" , "Back to main"],
             "",
-            200, 50, 400,
+            100*scaleFactor, 80*scaleFactor, 400*scaleFactor,
             function(numItem) {
                 if (numItem == 0) { Pause(); InGameMenu = null;  }
                 else if (numItem == 1) restart();
@@ -148,7 +148,7 @@ function restart()
 // text - message text.
 function AnimateMessageToUser(text, x, y)
 {
-    var randomId = Random(1000);
+    var randomId = Random(10000);
 
     var message = jQuery(document.createElement("h6"));
     message.text(text);
@@ -166,7 +166,7 @@ function AnimateMessageToUser(text, x, y)
 
     var createdMessage = jQuery('#' + randomId)
 
-    var maxTop = Math.floor(window.height * scaleFactor - 30);
+    var maxTop = Math.floor(window.height * scaleFactor) - 50;
     var randomTop = Random(maxTop);
 
     createdMessage.animate({

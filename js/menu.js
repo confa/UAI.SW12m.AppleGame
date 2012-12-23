@@ -1,5 +1,5 @@
 // Simple menu class
-var menuCounter = 0;
+var menuCounter = 100;
 var menuCounterIncrease = 10;
 
 Menu = function(title, items, footer, y, size, width, callback, backgroundCallback)
@@ -19,12 +19,15 @@ Menu.prototype.constructor = Menu;
 
 Menu.prototype.Render = function(elapsed)
 {
-    var lingrad = ctx.createLinearGradient(0,0,0,canvas.height);
-    lingrad.addColorStop(0, '#063A01');
-    lingrad.addColorStop(1, '#359209');
-    ctx.fillStyle = lingrad;
-    ctx.fillRect(0,0,canvas.width, canvas.height);
+//    var lingrad = ctx.createLinearGradient(0,0,0,canvas.height);
+//    lingrad.addColorStop(0, '#063A01');
+//    lingrad.addColorStop(1, '#359209');
+//    ctx.fillStyle = lingrad;
 
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    ctx.fillStyle = "rgba(0,0,0,0.5)";
+    ctx.fillRect(0,0,canvas.width, canvas.height);
     ctx.textAlign = "center";
     ctx.fillStyle = "White";
 
@@ -46,21 +49,17 @@ Menu.prototype.Render = function(elapsed)
     for (var i = 0; i < this.items.length; i++)
     {
         var size = Math.floor(this.size*0.8);
-        if (i == this.selectedItem)
-        {
-//            var v = Math.floor(127*Math.sin(Random(gameTime)*0.04) + 127);
-            if (menuCounter > 255) {
-                menuCounterIncrease = -10;
-            } else if (menuCounter < 0) {
-                menuCounterIncrease = 10;
-            }
-
-            menuCounter += menuCounterIncrease;
-
-            var v = menuCounter;
-            ctx.fillStyle = "rgba(255,"+v.toString()+",255,255)";
-            size = this.size;
+        if (menuCounter > 180) {
+            menuCounterIncrease = -1;
+        } else if (menuCounter < 130) {
+            menuCounterIncrease = 1;
         }
+
+        menuCounter += menuCounterIncrease;
+
+        var v = menuCounter + this.selectedItem * i;
+        ctx.fillStyle = "rgba(255,"+v.toString()+",255,255)";
+
         ctx.font = size.toString() + "px Times New Roman";
         y += this.size;
         ctx.fillText(this.items[i], canvas.width/2, y);
@@ -93,8 +92,6 @@ function GetRelativePosition(target, x,y) {
 
 Menu.prototype.Input = function()
 {
-//    console.log(this.lastMouseX);
-
     if(!newPos)
     {
         this.deltaX = 0 - this.lastMouseX;
@@ -113,35 +110,22 @@ Menu.prototype.Input = function()
         this.lastMouseY = newPos.y;
     }
 
+    var y = this.y - this.size/2.0; // Adjust for baseline
+
+    if (this.title) {
+        y += this.size*2;
+    }
+
+    if (this.lastMouseY >= y && this.lastMouseY < (y + this.size*this.items.length))
+    {
+        this.selectedItem = Math.floor((this.lastMouseY - y)/this.size);
+    }
 
     if (clickedEvent)
     {
         this.callback(this.selectedItem);
         clickedEvent = false;
         return;
-    }
-
-    var leftx = (canvas.width - this.width)/2;
-    if (this.lastMouseX >= leftx && this.lastMouseX < leftx+this.width)
-    {
-        if(menuChangeAudio == undefined)
-        {
-            menuChangeAudio = document.getElementById('menuChange');
-        }
-
-        if(prevSelected != this.selectedItem && menuChangeAudio != undefined)
-        {
-            menuChangeAudio.play();
-            prevSelected = this.selectedItem;
-        }
-        var y = this.y + this.size*0.2; // Adjust for baseline
-        if (this.title)
-            y += this.size*2;
-        if (this.lastMouseY >= y && this.lastMouseY < (y + this.size*this.items.length))
-        {
-            this.selectedItem = Math.floor((this.lastMouseY - y)/this.size);
-        }
-
     }
 }
 

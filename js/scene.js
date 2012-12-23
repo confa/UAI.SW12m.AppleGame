@@ -234,6 +234,7 @@ window.onload = function(){
 
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
+    scaleFactor = canvas.height / 600.0;
 
 //    setInterval(updateGameTime, 20);
 
@@ -254,8 +255,6 @@ window.onload = function(){
 
     width = canvas.width;
     height = canvas.height;
-
-    scaleFactor = height / 600.0;
 
     ApplyControls();
     //AnimateMessageToUser("LET'S START!!", 20);

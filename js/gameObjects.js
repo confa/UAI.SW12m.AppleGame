@@ -138,6 +138,23 @@ function appleFalling()
         }
     }
 }
+
+function slowApplesSpeed()
+{
+    for (var i=0; i< apples.length; i++)
+    {
+        apples[i].ySpeed = apples[i].ySpeed / 2.0;
+    }
+}
+
+function increaseApplesSpeed()
+{
+    for (var i=0; i< apples.length; i++)
+    {
+        apples[i].ySpeed = apples[i].ySpeed * 2.0;
+    }
+}
+
 // If apple lying per 3 seconds
 // it will disappeared
 function appleDisappearance()

@@ -230,11 +230,12 @@ function Hero(x, y){
             {
                 if(apple.isDrawing)
                 {
-                    apple.ySpeed = appleLowSpeed;
+                    apple.ySpeed = apple.ySpeed / 10;
+                    apple.gravity = apple.gravity / 10;
                 }
             });
             self.slowing = false;
-            self.slowingTimeout = 10000;
+            self.slowingTimeout = 100000;
             jQuery('#slow').css('background-image', 'url(img/slow-deactive.png)');
             jQuery('#slow').attr('disabled','disabled');
         }
