@@ -74,6 +74,7 @@ function Pause()
             },
             function(elapsed) { ctx.shadowOffsetX = 5; });
 
+//        InGameMenu.Render(0);
     }
 }
 

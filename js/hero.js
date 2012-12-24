@@ -202,7 +202,7 @@ function Hero(x, y){
                 {
                     self.x -= maxSpeedX * scaleFactor;
                 }
-                if(direction == 'right' && self.x < width - heroWidth)
+                if(direction == 'right' && self.x < width - heroWidth * scaleFactor)
                 {
                     self.x += maxSpeedX * scaleFactor;
                 }

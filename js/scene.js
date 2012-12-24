@@ -185,10 +185,15 @@ function drawScene(){
     if(gameOver) return;
     if(InGameMenu || pause)
     {
-        InGameMenu.Render();
+        InGameMenu.Render(0);
         return;
     }
     clear();
+
+    jQuery('#scene').data('background-image', 'url(../img/01.jpg)');
+//    jQuery('#scene').css('background-repeat', 'no-repeat');
+//    jQuery('#scene').css('background-size', '100%');
+
     drawAllApples(ctx);
     appleRipening();
     appleDisappearance();
@@ -236,6 +241,7 @@ window.onload = function(){
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
     scaleFactor = canvas.height / 600.0;
+
 
 //    setInterval(updateGameTime, 20);
 

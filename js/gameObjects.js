@@ -139,7 +139,7 @@ function appleFalling()
     }
 }
 
-function slowApplesSpeed()
+function slowAppleSpeed()
 {
     for (var i=0; i< apples.length; i++)
     {
@@ -147,7 +147,7 @@ function slowApplesSpeed()
     }
 }
 
-function increaseApplesSpeed()
+function increaseAppleSpeed()
 {
     for (var i=0; i< apples.length; i++)
     {
