@@ -178,22 +178,24 @@ function UpdateGameInfo(ctx)
     }
 }
 
+function drawBackground() {
+
+    ctx.drawImage(backgroundTexture, 0, 0, ctx.canvas.width, ctx.canvas.height);
+}
+
 //-----------------------------
 
 function drawScene(){
     gameTime++;
     if(gameOver) return;
+
     if(InGameMenu || pause)
     {
         InGameMenu.Render(0);
         return;
     }
     clear();
-
-    jQuery('#scene').data('background-image', 'url(../img/01.jpg)');
-//    jQuery('#scene').css('background-repeat', 'no-repeat');
-//    jQuery('#scene').css('background-size', '100%');
-
+    drawBackground();
     drawAllApples(ctx);
     appleRipening();
     appleDisappearance();

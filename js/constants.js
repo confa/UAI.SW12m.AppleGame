@@ -63,6 +63,9 @@ var wormyDisTimeout = 3000;
 var bonusDisTimeout = 4000;
 var dissapearingTick = 40;
 
+var backgroundTexture = new Image();
+backgroundTexture.src = 'img/01.jpg';
+
 var normalAppleTexture = new Image();
 normalAppleTexture.src = 'img/normalApple.png';
 
