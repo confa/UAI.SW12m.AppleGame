@@ -9,10 +9,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 body {
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    -khtml-user-select: none;
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 
     overflow-y:hidden;
