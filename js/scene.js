@@ -236,11 +236,9 @@ window.onload = function(){
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
-    alert(document.width + " " + window.innerWidth);
+//    alert(document.width + " " + window.innerWidth);
 
     scaleFactor = canvas.height / 600.0;
-
-//    setInterval(updateGameTime, 20);
 
     drawMainMenu();
 
